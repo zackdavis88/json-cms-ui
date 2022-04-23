@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
+import { authReducer } from './reducers';
 
 let store;
 
 function initStore(preloadedState = {}) {
   return configureStore({
     reducer: {
-      // posts: postsReducer,
-      // comments: commentsReducer,
-      // users: usersReducer,
+      auth: authReducer,
     },
     middleware: [thunk],
     preloadedState: preloadedState,
