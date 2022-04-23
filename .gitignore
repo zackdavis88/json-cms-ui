@@ -105,3 +105,4 @@ dist
 
 # Private files
 config/ssl/
+next-env.d.ts
