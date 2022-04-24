@@ -1,1 +1,1 @@
-export { getAuthToken } from './ssr_auth';
+export { getAuthToken } from './ssr';
