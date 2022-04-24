@@ -7,6 +7,7 @@ import {
   Action as ReduxAction,
 } from '@reduxjs/toolkit';
 import { RootState, AppDispatch } from 'src/store/store';
+import { TOKEN_HEADER, CONTENT_TYPE_APPLICATION_JSON } from 'src/constants';
 
 interface Action extends ReduxAction {
   types: string[];
@@ -36,7 +37,7 @@ const apiFetchMiddleware: Middleware =
         ...options,
         headers: {
           ...options.headers,
-          'x-auth-token': authToken,
+          [TOKEN_HEADER]: authToken,
         },
       };
     }
@@ -47,7 +48,7 @@ const apiFetchMiddleware: Middleware =
         body: JSON.stringify(payload),
         headers: {
           ...options.headers,
-          'Content-Type': 'application/json',
+          ...CONTENT_TYPE_APPLICATION_JSON,
         },
       };
     }
@@ -55,11 +56,11 @@ const apiFetchMiddleware: Middleware =
     store.dispatch({ type: REQUEST_TYPE });
     const response = await fetch(reqUrl, options);
     const body = await response.json();
-    const token = response.headers.get('x-auth-token');
+    const token = response.headers.get(TOKEN_HEADER);
     const status = response.status;
     let headers = {};
     if (token) {
-      headers = { 'x-auth-token': token };
+      headers = { [TOKEN_HEADER]: token };
     }
     if (status === 403) {
       store.dispatch({ type: AUTH_FAILURE });

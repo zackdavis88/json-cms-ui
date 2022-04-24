@@ -1,4 +1,5 @@
 import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from 'src/store/actions';
+import { TOKEN_HEADER } from 'src/constants';
 
 interface AuthState {
   isLoading: boolean;
@@ -44,13 +45,13 @@ const authReducer: AuthReducer = (state = initialState, action) => {
     case AUTH_SUCCESS:
       if (typeof document === 'object') {
         const expires = new Date(Date.now() + 1000 * 60 * 60 * 8).toUTCString();
-        document.cookie = `token=${action.response.headers['x-auth-token']}; expires=${expires}; path=/`;
+        document.cookie = `token=${action.response.headers[TOKEN_HEADER]}; expires=${expires}; path=/`;
       }
 
       return {
         ...state,
         isLoading: false,
-        token: action.response.headers['x-auth-token'],
+        token: action.response.headers[TOKEN_HEADER],
         user: action.response.body.user,
       };
     case AUTH_FAILURE:
