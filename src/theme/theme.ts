@@ -1,6 +1,5 @@
-// TODO: This is all copy/pasted from another project. Make the theme fit.
-import { createTheme } from '@mui/material/styles';
-import blue from '@mui/material/colors/blue';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import indigo from '@mui/material/colors/indigo';
 import lightBlue from '@mui/material/colors/lightBlue';
 import grey from '@mui/material/colors/grey';
 import red from '@mui/material/colors/red';
@@ -19,9 +18,9 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      light: blue['700'],
-      main: blue['800'],
-      dark: blue['900'],
+      light: indigo['700'],
+      main: indigo['800'],
+      dark: indigo['900'],
     },
     secondary: {
       light: grey['300'],
@@ -49,9 +48,9 @@ const theme = createTheme({
       dark: green['900'],
     },
     background: {
-      default: '#fafafa',
+      default: grey['100'],
     },
   },
 });
 
-export default theme;
+export default responsiveFontSizes(theme);
