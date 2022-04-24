@@ -4,9 +4,10 @@
   "description": "JSON CMS UI",
   "main": "server.js",
   "scripts": {
-    "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node server.js\"",
+    "start:dev": "node server.js",
     "start:prod": "NODE_ENV=production node server.js",
     "prestart:prod": "next build",
+    "ts-watch": "tsc-watch --noClear -p ./tsconfig.json",
     "test": "jest --watchAll --verbose"
   },
   "repository": {
