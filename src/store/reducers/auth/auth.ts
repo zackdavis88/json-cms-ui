@@ -16,8 +16,8 @@ interface UserData {
 }
 
 interface Action {
-  type: string;
-  response: {
+  type?: string;
+  response?: {
     headers: {
       [key: string]: string;
     };
