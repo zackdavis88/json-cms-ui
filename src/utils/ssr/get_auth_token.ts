@@ -3,9 +3,10 @@ import { AUTH_SUCCESS } from 'src/store/actions';
 import isServerReq from './is_server_request';
 import { TOKEN_HEADER } from 'src/constants';
 import appConfig from 'config';
+import { GetServerSidePropsContext } from 'next';
 const { API_FQDN } = appConfig;
 
-export const getAuthToken = async (context) => {
+export const getAuthToken = async (context: GetServerSidePropsContext) => {
   // If this is a client side request, return no initial props.
   if (!isServerReq(context)) {
     return { props: {} };

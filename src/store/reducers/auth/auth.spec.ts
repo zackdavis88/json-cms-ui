@@ -1,4 +1,4 @@
-import reducer from './auth';
+import reducer, { defaultState, defaultAction } from './auth';
 import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from 'src/store/actions';
 import { TOKEN_HEADER } from 'src/constants';
 
@@ -9,7 +9,7 @@ describe('Auth Reducer', () => {
       token: null,
       user: null,
     };
-    expect(reducer(undefined, {})).toEqual(expectedState);
+    expect(reducer(defaultState, defaultAction)).toEqual(expectedState);
   });
 
   it('should set isLoading to true while making requests', () => {
@@ -18,7 +18,7 @@ describe('Auth Reducer', () => {
       token: null,
       user: null,
     };
-    expect(reducer(undefined, { type: AUTH_REQUEST })).toEqual(expectedState);
+    expect(reducer(defaultState, { type: AUTH_REQUEST })).toEqual(expectedState);
   });
 
   it('should set token and user data after a successful request', () => {
@@ -42,12 +42,12 @@ describe('Auth Reducer', () => {
       },
     };
     expect(
-      reducer(undefined, { type: AUTH_SUCCESS, response: mockSuccessResponse }),
+      reducer(defaultState, { type: AUTH_SUCCESS, response: mockSuccessResponse }),
     ).toEqual(expectedState);
   });
 
   it('should clear token and user data after a failed request', () => {
-    const initialState = {
+    const existingState = {
       isLoading: false,
       token: 'this is a token',
       user: {
@@ -60,6 +60,6 @@ describe('Auth Reducer', () => {
       token: null,
       user: null,
     };
-    expect(reducer(initialState, { type: AUTH_FAILURE })).toEqual(expectedState);
+    expect(reducer(existingState, { type: AUTH_FAILURE })).toEqual(expectedState);
   });
 });

@@ -30,13 +30,13 @@ const _configuredStore = configureStore({
 export type RootState = ReturnType<typeof _configuredStore.getState>;
 export type AppDispatch = typeof _configuredStore.dispatch;
 
-let store;
 function initStore(preloadedState = {}) {
   return configureStore({
     ...storeConfig,
     preloadedState,
   });
 }
+let store: ReturnType<typeof initStore> | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type InitializeStore = (preloadedState?: any) => ReturnType<typeof initStore>;
@@ -62,7 +62,7 @@ export const initializeStore: InitializeStore = (preloadedState = undefined) => 
   return _store;
 };
 
-export function useStore(initialState) {
+export function useStore(initialState = {}) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }
