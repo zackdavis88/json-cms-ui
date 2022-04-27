@@ -1,9 +1,16 @@
 import React from 'react';
 import { Button, ButtonProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Link from 'next/link';
 
-const NavigationButton = ({ children, ...props }: ButtonProps) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const NavigationButton = ({ children, href, ...props }: ButtonProps) => {
+  const navigationButton = (
+    <StyledButton href={href} {...props}>
+      {children}
+    </StyledButton>
+  );
+
+  return href ? <Link href={href}>{navigationButton}</Link> : navigationButton;
 };
 
 const StyledButton = styled(Button)(({ theme }) => ({

@@ -3,14 +3,15 @@ import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const Brand = () => {
   const theme = useTheme();
   return (
-    <>
+    <Link href="/">
       <Typography
         variant="h4"
-        component="h1"
+        component="a"
         fontWeight="bold"
         lineHeight={`${theme.mixins.toolbar.height}px`}
         display="inline-flex"
@@ -20,7 +21,7 @@ const Brand = () => {
         </Box>
         JSON&nbsp;CMS
       </Typography>
-    </>
+    </Link>
   );
 };
 

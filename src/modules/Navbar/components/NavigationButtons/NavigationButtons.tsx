@@ -9,10 +9,10 @@ const NavigationButtons = () => {
   return (
     <>
       <Hidden hiddenOn="lgDown" display="inline-flex" height="100%">
-        <NavigationButton>Blueprints</NavigationButton>
-        <NavigationButton>Components</NavigationButton>
-        <NavigationButton>Layouts</NavigationButton>
-        <NavigationButton>Fragments</NavigationButton>
+        <NavigationButton href="/blueprints">Blueprints</NavigationButton>
+        <NavigationButton href="/components">Components</NavigationButton>
+        <NavigationButton href="/layouts">Layouts</NavigationButton>
+        <NavigationButton href="/fragments">Fragments</NavigationButton>
       </Hidden>
       <Hidden hiddenOn={['lgUp', 'smDown']} display="inline-flex" height="100%">
         <NavigationButton>Navigation Menu</NavigationButton>
