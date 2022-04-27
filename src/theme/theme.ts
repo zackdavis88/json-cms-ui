@@ -51,6 +51,11 @@ const theme = createTheme({
       default: grey['100'],
     },
   },
+  mixins: {
+    toolbar: {
+      height: 64,
+    },
+  },
 });
 
 export default responsiveFontSizes(theme);
