@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
+import { Hidden } from 'src/components';
 import Link from 'next/link';
 
 const Brand = () => {
@@ -17,7 +18,9 @@ const Brand = () => {
         display="inline-flex"
       >
         <Box component="span" marginRight={theme.spacing(1)}>
-          <FontAwesomeIcon icon={faCode} fixedWidth />
+          <Hidden hiddenOn="smDown">
+            <FontAwesomeIcon icon={faCode} fixedWidth />
+          </Hidden>
         </Box>
         JSON&nbsp;CMS
       </Typography>

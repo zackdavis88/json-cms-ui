@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationButton } from './NavigationButton';
+import { NavigationIconButton } from './NavigationIconButton';
 import { Hidden } from 'src/components';
-import { IconButton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,9 +18,9 @@ const NavigationButtons = () => {
         <NavigationButton>Navigation Menu</NavigationButton>
       </Hidden>
       <Hidden hiddenOn="smUp" display="inline-flex">
-        <IconButton color="primary" aria-label="open navigation">
+        <NavigationIconButton color="primary" aria-label="open navigation">
           <FontAwesomeIcon icon={faBars} fixedWidth size="sm" />
-        </IconButton>
+        </NavigationIconButton>
       </Hidden>
     </>
   );
