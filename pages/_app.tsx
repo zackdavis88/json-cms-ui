@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import { theme } from 'src/theme';
-import { useStore } from 'src/store';
+import { useStore } from 'src/hooks';
 import { Navbar } from 'src/modules';
 
 export default function App({ Component, pageProps }: AppProps) {
