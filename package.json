@@ -47,6 +47,7 @@
     "babel-jest": "^27.5.1",
     "eslint": "^8.14.0",
     "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
