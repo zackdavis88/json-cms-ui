@@ -14,10 +14,7 @@ const Brand = () => {
   const isAuthenticated = !!user;
   return (
     <Link href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}>
-      <StyledButton
-        href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}
-        disableTouchRipple
-      >
+      <StyledButton href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}>
         <Typography
           variant="h4"
           fontWeight="bold"
