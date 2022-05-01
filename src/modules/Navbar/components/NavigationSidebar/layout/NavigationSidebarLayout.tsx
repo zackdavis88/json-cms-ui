@@ -26,10 +26,12 @@ const NavigationSidebarLayout = ({
         marginBottom={theme.spacing(1)}
       >
         <NavigationSidebarButton onClick={onClose}>
-          <Box component="span" marginRight={theme.spacing(1)}>
-            <FontAwesomeIcon icon={faClose} fixedWidth className="fa-xl" />
+          <Box component="span" paddingLeft={theme.spacing(3)}>
+            <Box component="span" marginRight={theme.spacing(1)}>
+              <FontAwesomeIcon icon={faClose} fixedWidth className="fa-xl" />
+            </Box>
+            Close
           </Box>
-          Close
         </NavigationSidebarButton>
       </Box>
       {children}
@@ -43,7 +45,6 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
     whiteSpace: 'nowrap',
     width: '240px',
     background: `${theme.palette.primary.main}`,
-    paddingLeft: theme.spacing(3),
     color: theme.palette.common.white,
   },
 }));
