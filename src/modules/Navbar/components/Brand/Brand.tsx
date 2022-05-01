@@ -4,13 +4,14 @@ import { useTheme, styled } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import { Hidden } from 'src/components';
+import { ROUTES } from 'src/constants';
 import Link from 'next/link';
 
 const Brand = () => {
   const theme = useTheme();
   return (
     <Link href="/">
-      <StyledButton href="/" disableTouchRipple>
+      <StyledButton href={ROUTES.SIGN_IN} disableTouchRipple>
         <Typography
           variant="h4"
           fontWeight="bold"

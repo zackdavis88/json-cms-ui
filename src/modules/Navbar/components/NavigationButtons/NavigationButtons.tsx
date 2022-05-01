@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationButton, NavigationIconButton } from './components';
 import { Hidden } from 'src/components';
+import { ROUTES } from 'src/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { NavigationSidebar } from 'src/modules/Navbar/components';
@@ -16,10 +17,10 @@ const NavigationButtons = () => {
   return (
     <>
       <Hidden hiddenOn="lgDown" display="inline-flex" height="100%">
-        <NavigationButton href="/blueprints">Blueprints</NavigationButton>
-        <NavigationButton href="/components">Components</NavigationButton>
-        <NavigationButton href="/layouts">Layouts</NavigationButton>
-        <NavigationButton href="/fragments">Fragments</NavigationButton>
+        <NavigationButton href={ROUTES.BLUEPRINTS}>Blueprints</NavigationButton>
+        <NavigationButton href={ROUTES.COMPONENTS}>Components</NavigationButton>
+        <NavigationButton href={ROUTES.LAYOUTS}>Layouts</NavigationButton>
+        <NavigationButton href={ROUTES.FRAGMENTS}>Fragments</NavigationButton>
       </Hidden>
       <Hidden hiddenOn={['lgUp', 'smDown']} display="inline-flex" height="100%">
         <NavigationButton onClick={handleSidebarOpen}>
