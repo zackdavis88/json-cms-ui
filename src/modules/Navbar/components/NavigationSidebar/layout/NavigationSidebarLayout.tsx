@@ -3,7 +3,7 @@ import { Drawer, Box, DrawerProps } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { NavigationSidebarButton } from 'src/modules/Navbar/components/NavigationSidebar/NavigationSidebarButton';
+import { NavigationSidebarButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
 
 interface NavigationSidebarLayoutProps extends DrawerProps {
   onClose: () => void;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavigationButton } from './NavigationButton';
-import { NavigationIconButton } from './NavigationIconButton';
+import { NavigationButton, NavigationIconButton } from './components';
 import { Hidden } from 'src/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';

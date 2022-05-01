@@ -1,6 +1,6 @@
 import React from 'react';
 import { BoxProps } from '@mui/material';
-import { ResponsiveWrapper } from './ResponsiveWrapper';
+import { ResponsiveWrapper } from './components';
 
 export type HiddenOption =
   | 'xsDown'

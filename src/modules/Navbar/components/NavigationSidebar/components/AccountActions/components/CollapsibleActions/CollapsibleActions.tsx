@@ -3,7 +3,7 @@ import { Box, Collapse } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/material/styles';
-import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/NavigationSidebarListItemButton';
+import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
 
 interface CollapsibleActionsProps {
   handleClose: () => void;

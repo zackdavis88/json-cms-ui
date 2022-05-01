@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/NavigationSidebarListItemButton';
+import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { CollapsibleActions } from './CollapsibleActions';
+import { CollapsibleActions } from './components';
 
 interface UserActionsProps {
   handleClose: () => void;

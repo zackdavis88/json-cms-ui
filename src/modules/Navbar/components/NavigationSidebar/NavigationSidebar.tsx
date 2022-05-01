@@ -1,8 +1,7 @@
 import React from 'react';
 import { Box, DrawerProps } from '@mui/material';
 import { NavigationSidebarLayout } from './layout';
-import { NavigationSidebarListItemButton } from './NavigationSidebarListItemButton';
-import { AccountActions } from './AccountActions';
+import { NavigationSidebarListItemButton, AccountActions } from './components';
 
 interface NavigationSidebarProps extends DrawerProps {
   handleClose: () => void;

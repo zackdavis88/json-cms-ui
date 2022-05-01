@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { NavigationSidebarButton } from 'src/modules/Navbar/components/NavigationSidebar/NavigationSidebarButton';
+import { NavigationSidebarButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
 
 interface NavigationSidebarListItemButtonProps {
   children: React.ReactNode;
