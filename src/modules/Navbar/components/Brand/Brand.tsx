@@ -6,12 +6,18 @@ import { faCode } from '@fortawesome/free-solid-svg-icons';
 import { Hidden } from 'src/components';
 import { ROUTES } from 'src/constants';
 import Link from 'next/link';
+import { useCurrentUser } from 'src/hooks';
 
 const Brand = () => {
   const theme = useTheme();
+  const user = useCurrentUser();
+  const isAuthenticated = !!user;
   return (
-    <Link href="/">
-      <StyledButton href={ROUTES.SIGN_IN} disableTouchRipple>
+    <Link href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}>
+      <StyledButton
+        href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}
+        disableTouchRipple
+      >
         <Typography
           variant="h4"
           fontWeight="bold"
