@@ -24,6 +24,17 @@ const PopoverMenu = ({
   const buttonRef = React.useRef<HTMLButtonElement>();
   const menuId = `${buttonId}-muimenu`;
 
+  React.useEffect(() => {
+    const handleWindowResize = () => {
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, [isOpen]);
+
   return (
     <Box display="inline" padding="0" margin="0">
       <StyledButton
