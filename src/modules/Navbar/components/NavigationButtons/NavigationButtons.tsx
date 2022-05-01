@@ -7,12 +7,20 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { NavigationSidebar } from 'src/modules/Navbar/components';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useCurrentUser } from 'src/hooks';
 
 const NavigationButtons = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
   const handleSidebarOpen = () => setSidebarOpen(true);
   const handleSidebarClose = () => setSidebarOpen(false);
   const theme = useTheme();
+  const user = useCurrentUser();
+  const isAuthenticated = !!user;
+
+  // Return nothing if we dont have an authenticated user.
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <>
