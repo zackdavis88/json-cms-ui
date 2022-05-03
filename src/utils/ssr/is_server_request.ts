@@ -5,5 +5,5 @@ import { GetServerSidePropsContext } from 'next';
    reached via client-side navigation O_o which is pretty shitty naming on nextJS's part.
 */
 export default function isServerReq(context: GetServerSidePropsContext) {
-  return !context.req.url.startsWith('/_next');
+  return !context.req.url?.startsWith('/_next');
 }
