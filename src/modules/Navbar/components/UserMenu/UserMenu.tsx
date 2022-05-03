@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentUser } from 'src/hooks';
-import { PopoverMenu } from 'src/components';
+import { PopoverMenu, Hidden } from 'src/components';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,14 +36,16 @@ const UserMenu = () => {
   }
 
   return (
-    <PopoverMenu items={userMenuItems}>
-      <Box component="span" width="100%" display="inline-flex" fontWeight="bold">
-        {user.displayName}
-        <Box component="span" marginLeft={theme.spacing(1)}>
-          <FontAwesomeIcon icon={faCaretDown} fixedWidth size="lg" />
+    <Hidden hiddenOn="lgDown">
+      <PopoverMenu items={userMenuItems}>
+        <Box component="span" width="100%" display="inline-flex" fontWeight="bold">
+          {user.displayName}
+          <Box component="span" marginLeft={theme.spacing(1)}>
+            <FontAwesomeIcon icon={faCaretDown} fixedWidth size="lg" />
+          </Box>
         </Box>
-      </Box>
-    </PopoverMenu>
+      </PopoverMenu>
+    </Hidden>
   );
 };
 

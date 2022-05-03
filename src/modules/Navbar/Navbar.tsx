@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Hidden } from 'src/components';
 import { NavbarLayout } from './layout';
 import { Brand, NavigationButtons, UserMenu } from './components';
 
@@ -32,9 +31,7 @@ const Navbar = () => {
         justifyContent="flex-end"
         width="100%"
       >
-        <Hidden hiddenOn="lgDown">
-          <UserMenu />
-        </Hidden>
+        <UserMenu />
       </Box>
     </NavbarLayout>
   );
