@@ -6,6 +6,8 @@ function HomePage() {
   return <div>Home Page</div>;
 }
 
-export const getServerSideProps: GetServerSideProps = getAuthToken;
+export const getServerSideProps: GetServerSideProps = getAuthToken({
+  authRequired: true,
+});
 
 export default HomePage;

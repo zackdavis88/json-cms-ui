@@ -6,6 +6,9 @@ function FragmentsPage() {
   return <div>Fragments Page</div>;
 }
 
-export const getServerSideProps: GetServerSideProps = getAuthToken;
+// TODO: this SSR method is a placeholder. It will be replaced once this page starts development.
+export const getServerSideProps: GetServerSideProps = getAuthToken({
+  authRequired: true,
+});
 
 export default FragmentsPage;
