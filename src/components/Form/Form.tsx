@@ -17,7 +17,7 @@ interface FormProps extends BoxProps {
 const Form = ({
   acceptCharset,
   action,
-  autoComplete,
+  autoComplete = 'off',
   children,
   encType,
   method,

@@ -68,7 +68,7 @@ const theme = createTheme({
       height: 64,
     },
   },
-  radii: (factor: number) => `${8 * factor}px`,
+  radii: (factor: number) => `${4 * factor}px`,
 });
 
 export default responsiveFontSizes(theme);
