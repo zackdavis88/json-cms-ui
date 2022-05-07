@@ -41,7 +41,6 @@ const NavigationButton = ({ children, href, ...props }: ButtonProps) => {
 const StyledButton = styled(Button)(({ theme }) => ({
   height: '100%',
   color: theme.palette.common.white,
-  marginRight: theme.spacing(1),
   borderRadius: 0,
   fontWeight: 'bold',
   padding: 0,
