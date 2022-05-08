@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const NavigationSidebarButton = ({ children, href, onClick }: ButtonProps) => {
   const router = useRouter();
-  const isActivePath = router.asPath === href;
+  const isActivePath = router.pathname === href;
 
   const sidebarButton = (
     <StyledButton onClick={onClick} href={href}>
