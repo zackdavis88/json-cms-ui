@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import { getAuthToken } from 'src/utils';
 import { Box, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { LoginForm } from 'src/modules';
 import Head from 'next/head';
 
 function Index() {
@@ -19,12 +20,7 @@ function Index() {
         paddingTop={theme.spacing(4)}
       >
         <Container maxWidth="sm">
-          <Box
-            bgcolor={theme.palette.secondary.main}
-            width="100%"
-            borderRadius={theme.radii(1)}
-            height="500px"
-          ></Box>
+          <LoginForm />
         </Container>
       </Box>
     </>
