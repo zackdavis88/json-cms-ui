@@ -1,4 +1,4 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from 'src/store/actions';
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, SIGN_OUT } from 'src/store/actions';
 import { TOKEN_HEADER } from 'src/constants';
 import { Action as ReduxAction } from '@reduxjs/toolkit';
 
@@ -56,6 +56,7 @@ const authReducer: AuthReducer = (state = defaultState, action = defaultAction) 
         user:
           action.response && action.response.body.user ? action.response.body.user : null,
       };
+    case SIGN_OUT:
     case AUTH_FAILURE:
       // lets just return the user to the defaultState on failure for now...prolly good enough.
       if (typeof document === 'object') {

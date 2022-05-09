@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCurrentUser } from 'src/hooks';
+import { useCurrentUser, useSignOut } from 'src/hooks';
 import { PopoverMenu, Hidden } from 'src/components';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -13,6 +13,7 @@ import {
 const UserMenu = () => {
   const theme = useTheme();
   const user = useCurrentUser();
+  const signOut = useSignOut();
   const isAuthenticated = !!user;
   const userMenuItems = [
     {
@@ -25,9 +26,7 @@ const UserMenu = () => {
     {
       startIcon: <FontAwesomeIcon icon={faRightFromBracket} fixedWidth />,
       label: 'Sign Out',
-      onClick: () => {
-        console.log('Sign Out Clicked');
-      },
+      onClick: signOut,
     },
   ];
 

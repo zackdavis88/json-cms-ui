@@ -1,5 +1,5 @@
 import reducer, { defaultState, defaultAction } from './auth';
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from 'src/store/actions';
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, SIGN_OUT } from 'src/store/actions';
 import { TOKEN_HEADER } from 'src/constants';
 
 describe('Auth Reducer', () => {
@@ -61,5 +61,22 @@ describe('Auth Reducer', () => {
       user: null,
     };
     expect(reducer(existingState, { type: AUTH_FAILURE })).toEqual(expectedState);
+  });
+
+  it('should clear token and user data after sign out', () => {
+    const existingState = {
+      isLoading: false,
+      token: 'this is a token that exists in the reducer state',
+      user: {
+        username: 'a user',
+        displayName: 'A uSeR',
+      },
+    };
+    const expectedState = {
+      isLoading: false,
+      token: null,
+      user: null,
+    };
+    expect(reducer(existingState, { type: SIGN_OUT })).toEqual(expectedState);
   });
 });
