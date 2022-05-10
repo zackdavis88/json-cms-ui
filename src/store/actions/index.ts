@@ -6,4 +6,5 @@ export {
   authenticate,
   signOut,
 } from './auth';
+export { USER_REQUEST, USER_SUCCESS, USER_FAILURE, createUser } from './user';
 export const API_REQUEST = 'API_REQUEST';

@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import { authReducer } from './reducers';
+import { authReducer, userReducer } from './reducers';
 import { apiFetch } from './middleware';
 
 /*
@@ -11,6 +10,7 @@ import { apiFetch } from './middleware';
 const storeConfig = {
   reducer: {
     auth: authReducer,
+    user: userReducer,
   },
   middleware: [thunk, apiFetch],
 };
