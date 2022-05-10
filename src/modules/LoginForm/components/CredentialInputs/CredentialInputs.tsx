@@ -27,6 +27,7 @@ const CredentialInputs = ({ username, password }: CredentialInputsProps) => {
           fullWidth
           value={username.value}
           onChange={username.onChange}
+          required
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
@@ -37,6 +38,7 @@ const CredentialInputs = ({ username, password }: CredentialInputsProps) => {
           fullWidth
           value={password.value}
           onChange={password.onChange}
+          required
         />
       </Box>
     </>

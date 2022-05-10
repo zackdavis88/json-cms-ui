@@ -35,6 +35,7 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
           onChange={username.onChange}
           error={!!username.error}
           helperText={username.error}
+          required
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
@@ -47,6 +48,7 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
           onChange={password.onChange}
           error={!!password.error}
           helperText={password.error}
+          required
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
@@ -59,6 +61,7 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
           onChange={confirmPassword.onChange}
           error={!!confirmPassword.error}
           helperText={confirmPassword.error}
+          required
         />
       </Box>
     </>
