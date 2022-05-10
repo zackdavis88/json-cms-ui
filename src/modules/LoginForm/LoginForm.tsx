@@ -6,7 +6,11 @@ import { useAuthLoading } from './hooks';
 import { useRouter } from 'next/router';
 import { ROUTES } from 'src/constants';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onSignUpClick: () => void;
+}
+
+const LoginForm = ({ onSignUpClick }: LoginFormProps) => {
   const [username, setUsername] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
   const [apiError, setApiError] = React.useState<string>('');
@@ -60,7 +64,7 @@ const LoginForm = () => {
         username={{ value: username, onChange: handleUsernameChange }}
         password={{ value: password, onChange: handlePasswordChange }}
       />
-      <ActionButtons submitDisabled={submitDisabled} />
+      <ActionButtons submitDisabled={submitDisabled} onSignUpClick={onSignUpClick} />
     </LoginFormLayout>
   );
 };

@@ -6,9 +6,10 @@ import { ActionsContainer } from './components';
 
 interface ActionButtonsProps {
   submitDisabled: boolean;
+  onSignUpClick: () => void;
 }
 
-const ActionButtons = ({ submitDisabled }: ActionButtonsProps) => {
+const ActionButtons = ({ onSignUpClick, submitDisabled }: ActionButtonsProps) => {
   return (
     <ActionsContainer>
       <Button type="submit" variant="contained" fullWidth disabled={submitDisabled}>
@@ -16,7 +17,7 @@ const ActionButtons = ({ submitDisabled }: ActionButtonsProps) => {
           <FontAwesomeIcon icon={faRightToBracket} fixedWidth /> Login
         </Typography>
       </Button>
-      <Button variant="outlined" fullWidth>
+      <Button variant="outlined" fullWidth onClick={onSignUpClick}>
         <Typography component="span" typography="button">
           <FontAwesomeIcon icon={faUserPlus} fixedWidth /> Sign Up
         </Typography>
