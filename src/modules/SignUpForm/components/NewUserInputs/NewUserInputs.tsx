@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { PasswordTextField } from 'src/components';
 
 interface NewUserInputsProps {
   username: {
@@ -37,11 +38,10 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
-        <TextField
+        <PasswordTextField
           id="sign-up-password"
           label="Password"
           variant="filled"
-          type="password"
           fullWidth
           value={password.value}
           onChange={password.onChange}
@@ -50,11 +50,10 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
-        <TextField
+        <PasswordTextField
           id="sign-up-confirm-password"
           label="Confirm Password"
           variant="filled"
-          type="password"
           fullWidth
           value={confirmPassword.value}
           onChange={confirmPassword.onChange}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { PasswordTextField } from 'src/components';
 
 interface CredentialInputsProps {
   username: {
@@ -22,17 +23,17 @@ const CredentialInputs = ({ username, password }: CredentialInputsProps) => {
           id="login-username"
           label="Username"
           variant="filled"
+          type="text"
           fullWidth
           value={username.value}
           onChange={username.onChange}
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
-        <TextField
+        <PasswordTextField
           id="login-password"
           label="Password"
           variant="filled"
-          type="password"
           fullWidth
           value={password.value}
           onChange={password.onChange}
