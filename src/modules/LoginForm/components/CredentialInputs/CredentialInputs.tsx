@@ -16,6 +16,12 @@ interface CredentialInputsProps {
 
 const CredentialInputs = ({ username, password }: CredentialInputsProps) => {
   const theme = useTheme();
+  const inputToFocus = React.useRef<HTMLInputElement>();
+  React.useEffect(() => {
+    if (inputToFocus.current) {
+      inputToFocus.current.focus();
+    }
+  }, []);
   return (
     <>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
@@ -28,6 +34,7 @@ const CredentialInputs = ({ username, password }: CredentialInputsProps) => {
           value={username.value}
           onChange={username.onChange}
           required
+          inputRef={inputToFocus}
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>

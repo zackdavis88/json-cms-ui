@@ -54,7 +54,7 @@ const SignUpForm = ({ onBackClick }: SignUpFormProps) => {
     }
 
     // TODO: Set a success notification once notifications are a thing...
-    // onBackClick();
+    onBackClick();
   };
 
   const handleUsernameChange = (
