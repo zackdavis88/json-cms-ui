@@ -1,3 +1,5 @@
+import { NotificationTypes as _NotificationTypes } from './notification';
+export type NotificationTypes = _NotificationTypes;
 export {
   AUTH_SUCCESS,
   AUTH_FAILURE,
@@ -7,4 +9,10 @@ export {
   signOut,
 } from './auth';
 export { USER_REQUEST, USER_SUCCESS, USER_FAILURE, createUser } from './user';
+export {
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
+  showNotification,
+  hideNotification,
+} from './notification';
 export const API_REQUEST = 'API_REQUEST';
