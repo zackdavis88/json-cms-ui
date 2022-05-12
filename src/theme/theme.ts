@@ -7,6 +7,16 @@ import green from '@mui/material/colors/green';
 import amber from '@mui/material/colors/amber';
 import common from '@mui/material/colors/common';
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    radii: (factor: number) => string;
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    radii?: (factor: number) => string;
+  }
+}
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -58,6 +68,7 @@ const theme = createTheme({
       height: 64,
     },
   },
+  radii: (factor: number) => `${4 * factor}px`,
 });
 
 export default responsiveFontSizes(theme);

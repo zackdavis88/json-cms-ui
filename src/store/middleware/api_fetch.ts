@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { AUTH_FAILURE } from 'src/store/actions';
+import { AUTH_FAILURE, API_REQUEST } from 'src/store/actions';
 import {
   Middleware,
   MiddlewareAPI,
@@ -10,9 +10,10 @@ import { RootState, AppDispatch } from 'src/store/store';
 import { TOKEN_HEADER, CONTENT_TYPE_APPLICATION_JSON } from 'src/constants';
 
 interface Action extends ReduxAction {
-  types: string[];
-  reqUrl: string;
-  reqOptions?: {
+  type: string;
+  reducerTypes: string[];
+  url: string;
+  options?: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   };
@@ -24,13 +25,21 @@ const apiFetchMiddleware: Middleware =
   (store: MiddlewareAPI<AppDispatch, RootState>) =>
   (next: Dispatch) =>
   async (action: Action) => {
-    if (!action.types || !Array.isArray(action.types) || action.types.length !== 3) {
-      return next(action); // bail out of this middleware function if we dont have action.types with 3 types.
+    const { type, reducerTypes, url, payload } = action;
+    let { options } = action;
+
+    const skipMiddleware =
+      type !== API_REQUEST ||
+      !reducerTypes ||
+      !Array.isArray(reducerTypes) ||
+      reducerTypes.length !== 3;
+
+    if (skipMiddleware) {
+      return next(action);
     }
 
-    const { types, reqUrl, reqOptions, payload } = action;
-    let options = reqOptions ? { ...reqOptions } : {};
-    const [REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE] = types;
+    options = options ?? {};
+    const [REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE] = reducerTypes;
     const authToken = store.getState().auth.token;
     if (authToken) {
       options = {
@@ -54,14 +63,16 @@ const apiFetchMiddleware: Middleware =
     }
 
     store.dispatch({ type: REQUEST_TYPE });
-    const response = await fetch(reqUrl, options);
+    const response = await fetch(url, options);
     const body = await response.json();
     const token = response.headers.get(TOKEN_HEADER);
     const status = response.status;
+
     let headers = {};
     if (token) {
       headers = { [TOKEN_HEADER]: token };
     }
+
     if (status === 403) {
       store.dispatch({ type: AUTH_FAILURE });
       return { status, body };

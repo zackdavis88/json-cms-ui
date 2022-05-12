@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationButton, NavigationIconButton } from './components';
+import { NavigationButton, NavigationIconButton, NavigationDivider } from './components';
 import { Hidden } from 'src/components';
 import { ROUTES } from 'src/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,8 +26,11 @@ const NavigationButtons = () => {
     <>
       <Hidden hiddenOn="lgDown" display="inline-flex" height="100%">
         <NavigationButton href={ROUTES.BLUEPRINTS}>Blueprints</NavigationButton>
+        <NavigationDivider orientation="vertical" flexItem />
         <NavigationButton href={ROUTES.COMPONENTS}>Components</NavigationButton>
+        <NavigationDivider orientation="vertical" flexItem />
         <NavigationButton href={ROUTES.LAYOUTS}>Layouts</NavigationButton>
+        <NavigationDivider orientation="vertical" flexItem />
         <NavigationButton href={ROUTES.FRAGMENTS}>Fragments</NavigationButton>
       </Hidden>
       <Hidden hiddenOn={['lgUp', 'smDown']} display="inline-flex" height="100%">

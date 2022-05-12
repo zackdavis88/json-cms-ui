@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/material/styles';
 import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
+import { useSignOut } from 'src/hooks';
 
 interface CollapsibleActionsProps {
   handleClose: () => void;
@@ -12,6 +13,11 @@ interface CollapsibleActionsProps {
 
 const CollapsibleActions = ({ handleClose, isOpen }: CollapsibleActionsProps) => {
   const theme = useTheme();
+  const signOut = useSignOut();
+  const handleSignOut = React.useCallback(() => {
+    signOut();
+    handleClose();
+  }, [handleClose, signOut]);
   return (
     <Collapse in={isOpen} timeout="auto" unmountOnExit>
       <Box component="ul" margin="0" padding="0">
@@ -33,10 +39,7 @@ const CollapsibleActions = ({ handleClose, isOpen }: CollapsibleActionsProps) =>
         </NavigationSidebarListItemButton>
         <NavigationSidebarListItemButton
           handleClose={handleClose}
-          onClick={() => {
-            console.log('Sign Out Clicked');
-            handleClose();
-          }}
+          onClick={handleSignOut}
           labelDisplay="flex"
           labelAlignItems="center"
           labelJustifyContent="flex-start"

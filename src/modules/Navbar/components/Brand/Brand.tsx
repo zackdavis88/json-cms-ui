@@ -17,6 +17,7 @@ const Brand = () => {
       <StyledButton href={isAuthenticated ? ROUTES.HOME : ROUTES.SIGN_IN}>
         <Typography
           variant="h4"
+          component="h1"
           fontWeight="bold"
           lineHeight={`${theme.mixins.toolbar.height}px`}
           display="inline-flex"
