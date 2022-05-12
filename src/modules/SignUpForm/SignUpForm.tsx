@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionButtons, NewUserInputs } from './components';
 import { SignUpFormLayout } from './layout';
-import { useCreateUser } from 'src/hooks';
+import { useDispatchCreateUser } from 'src/hooks';
 import { useUserLoading } from './hooks';
 
 interface FormInputState {
@@ -27,7 +27,7 @@ const SignUpForm = ({ onBackClick }: SignUpFormProps) => {
     error: '',
   });
   const requestLoading = useUserLoading();
-  const createUser = useCreateUser();
+  const createUser = useDispatchCreateUser();
 
   const hasNoInputValues = !(username.value && password.value && confirmPassword.value);
   const hasInputError = !!(username.error || password.error || confirmPassword.error);

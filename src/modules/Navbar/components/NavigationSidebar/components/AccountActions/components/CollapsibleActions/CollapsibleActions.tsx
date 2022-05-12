@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/material/styles';
 import { NavigationSidebarListItemButton } from 'src/modules/Navbar/components/NavigationSidebar/components';
-import { useSignOut } from 'src/hooks';
+import { useDispatchSignOut } from 'src/hooks';
 
 interface CollapsibleActionsProps {
   handleClose: () => void;
@@ -13,7 +13,7 @@ interface CollapsibleActionsProps {
 
 const CollapsibleActions = ({ handleClose, isOpen }: CollapsibleActionsProps) => {
   const theme = useTheme();
-  const signOut = useSignOut();
+  const signOut = useDispatchSignOut();
   const handleSignOut = React.useCallback(() => {
     signOut();
     handleClose();

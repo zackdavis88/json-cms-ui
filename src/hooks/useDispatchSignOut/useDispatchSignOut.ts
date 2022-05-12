@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { signOut as signOutAction } from 'src/store/actions';
 
-const useSignOut = () => {
+const useDispatchSignOut = () => {
   const dispatch = useDispatch();
 
   const signOut = React.useCallback(() => {
@@ -12,4 +12,4 @@ const useSignOut = () => {
   return signOut;
 };
 
-export default useSignOut;
+export default useDispatchSignOut;

@@ -10,7 +10,7 @@ interface CreateUserResponse {
   status: number;
 }
 
-const useCreateUser = () => {
+const useDispatchCreateUser = () => {
   const dispatch = useDispatch();
 
   const createUser = React.useCallback(
@@ -26,4 +26,4 @@ const useCreateUser = () => {
   return createUser;
 };
 
-export default useCreateUser;
+export default useDispatchCreateUser;

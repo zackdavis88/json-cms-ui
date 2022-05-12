@@ -1,8 +1,7 @@
-export { default as useBreakpoint } from './useBreakpoint';
 export { default as useStore } from './useStore';
 export { default as useCurrentUser } from './useCurrentUser';
-export { default as useAuthenticate } from './useAuthenticate';
-export { default as useSignOut } from './useSignOut';
-export { default as useCreateUser } from './useCreateUser';
-export { default as useShowNotification } from './useShowNotification';
-export { default as useHideNotification } from './useHideNotification';
+export { default as useDispatchAuthenticate } from './useDispatchAuthenticate';
+export { default as useDispatchSignOut } from './useDispatchSignOut';
+export { default as useDispatchCreateUser } from './useDispatchCreateUser';
+export { default as useDispatchShowNotification } from './useDispatchShowNotification';
+export { default as useDispatchHideNotification } from './useDispatchHideNotification';

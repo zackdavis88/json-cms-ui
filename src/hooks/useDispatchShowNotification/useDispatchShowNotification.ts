@@ -5,7 +5,7 @@ import {
   NotificationTypes,
 } from 'src/store/actions';
 
-const useCreateUser = () => {
+const useDispatchShowNotification = () => {
   const dispatch = useDispatch();
 
   const showNotification = React.useCallback(
@@ -18,4 +18,4 @@ const useCreateUser = () => {
   return showNotification;
 };
 
-export default useCreateUser;
+export default useDispatchShowNotification;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { hideNotification as hideNotificationAction } from 'src/store/actions';
 
-const useHideNotification = () => {
+const useDispatchHideNotification = () => {
   const dispatch = useDispatch();
 
   const hideNotification = React.useCallback(() => {
@@ -12,4 +12,4 @@ const useHideNotification = () => {
   return hideNotification;
 };
 
-export default useHideNotification;
+export default useDispatchHideNotification;

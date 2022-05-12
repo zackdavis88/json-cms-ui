@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionButtons, CredentialInputs } from './components';
 import { LoginFormLayout } from './layout';
-import { useAuthenticate } from 'src/hooks';
+import { useDispatchAuthenticate } from 'src/hooks';
 import { useAuthLoading } from './hooks';
 import { useRouter } from 'next/router';
 import { ROUTES } from 'src/constants';
@@ -15,7 +15,7 @@ const LoginForm = ({ onSignUpClick }: LoginFormProps) => {
   const [password, setPassword] = React.useState<string>('');
   const [apiError, setApiError] = React.useState<string>('');
   const authIsLoading = useAuthLoading();
-  const authenticate = useAuthenticate();
+  const authenticate = useDispatchAuthenticate();
   const router = useRouter();
   const submitDisabled = !(username && password) || authIsLoading;
 
