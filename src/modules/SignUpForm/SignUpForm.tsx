@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActionButtons, NewUserInputs } from './components';
 import { SignUpFormLayout } from './layout';
-import { useDispatchCreateUser } from 'src/hooks';
+import { useDispatchCreateUser, useDispatchShowNotification } from 'src/hooks';
 import { useUserLoading } from './hooks';
 
 interface FormInputState {
@@ -28,7 +28,7 @@ const SignUpForm = ({ onBackClick }: SignUpFormProps) => {
   });
   const requestLoading = useUserLoading();
   const createUser = useDispatchCreateUser();
-
+  const showNotification = useDispatchShowNotification();
   const hasNoInputValues = !(username.value && password.value && confirmPassword.value);
   const hasInputError = !!(username.error || password.error || confirmPassword.error);
   const submitDisabled = hasNoInputValues || hasInputError || requestLoading;
@@ -53,7 +53,9 @@ const SignUpForm = ({ onBackClick }: SignUpFormProps) => {
       }
     }
 
-    // TODO: Set a success notification once notifications are a thing...
+    if (body.message) {
+      showNotification(body.message, 'success');
+    }
     onBackClick();
   };
 
