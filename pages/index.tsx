@@ -12,16 +12,16 @@ function Index() {
   return (
     <>
       <Head>
-        <title></title>
+        <title>JSON CMS - Login or Sign Up</title>
       </Head>
       <Box
         width="100%"
         display="flex"
         justifyContent="center"
-        paddingTop={theme.spacing(4)}
+        paddingTop={theme.spacing(2)}
       >
         <Container maxWidth="sm">
-          <Box display="block" position="relative" width="100%">
+          <Box display="block" position="relative" width="100%" minHeight="270px">
             <Slide direction="right" in={!showSignUpForm} appear={false} unmountOnExit>
               <Box position="absolute" top="0" left="0">
                 <LoginForm onSignUpClick={() => setShowSignUpForm(true)} />
