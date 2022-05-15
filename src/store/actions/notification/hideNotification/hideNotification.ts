@@ -1,9 +1,9 @@
 import { HIDE_NOTIFICATION } from 'src/store/actions/index';
 
-const showNotification = () => {
+const hideNotification = () => {
   return {
     type: HIDE_NOTIFICATION,
   };
 };
 
-export default showNotification;
+export default hideNotification;
