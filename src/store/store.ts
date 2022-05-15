@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import { authReducer, userReducer } from './reducers';
+import { authReducer, userReducer, notificationReducer } from './reducers';
 import { apiFetch } from './middleware';
 
 /*
@@ -11,6 +11,7 @@ const storeConfig = {
   reducer: {
     auth: authReducer,
     user: userReducer,
+    notification: notificationReducer,
   },
   middleware: [thunk, apiFetch],
 };

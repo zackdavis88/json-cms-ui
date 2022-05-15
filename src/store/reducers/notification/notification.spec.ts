@@ -6,28 +6,32 @@ describe('Notification Reducer', () => {
     const expectedState = {
       message: '',
       notificationType: 'info',
+      showNotification: false,
     };
     expect(reducer(defaultState, defaultAction)).toEqual(expectedState);
   });
 
-  it('should set the message and notificationType with the showNotification action', () => {
+  it('should set the notification data with the showNotification action', () => {
     const expectedState = {
       message: 'this is a test message',
       notificationType: 'success',
+      showNotification: true,
     };
     expect(
       reducer(defaultState, showNotification('this is a test message', 'success')),
     ).toEqual(expectedState);
   });
 
-  it('should clear the message with the hideNotification action', () => {
+  it('should set showNotification to false with the hideNotification action', () => {
     const existingState = {
       message: 'This is a notification that is existing in the state',
       notificationType: 'error' as NotificationTypes,
+      showNotification: true,
     };
     const expectedState = {
-      message: '',
+      message: 'This is a notification that is existing in the state',
       notificationType: 'error' as NotificationTypes,
+      showNotification: false,
     };
     expect(reducer(existingState, hideNotification())).toEqual(expectedState);
   });

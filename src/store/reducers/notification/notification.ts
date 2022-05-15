@@ -5,9 +5,10 @@ import {
 } from 'src/store/actions';
 import { Action as ReduxAction } from '@reduxjs/toolkit';
 
-interface NotificationState {
+export interface NotificationState {
   message: string;
   notificationType: NotificationTypes;
+  showNotification: boolean;
 }
 
 interface NotificationAction extends ReduxAction {
@@ -18,6 +19,7 @@ interface NotificationAction extends ReduxAction {
 export const defaultState: NotificationState = {
   message: '',
   notificationType: 'info',
+  showNotification: false,
 };
 
 export const defaultAction: NotificationAction = {
@@ -36,11 +38,12 @@ const notificationReducer: NotificationReducer = (state = defaultState, action) 
       return {
         message: action.message || '',
         notificationType: action.notificationType || 'info',
+        showNotification: true,
       };
     case HIDE_NOTIFICATION:
       return {
         ...state,
-        message: '',
+        showNotification: false,
       };
     default:
       return state;
