@@ -10,7 +10,7 @@ interface AuthenticateResponse {
   status: number;
 }
 
-const useAuthenticate = () => {
+const useDispatchAuthenticate = () => {
   const dispatch = useDispatch();
 
   const authenticate = React.useCallback(
@@ -26,4 +26,4 @@ const useAuthenticate = () => {
   return authenticate;
 };
 
-export default useAuthenticate;
+export default useDispatchAuthenticate;

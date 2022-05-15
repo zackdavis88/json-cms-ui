@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCurrentUser, useSignOut } from 'src/hooks';
+import { useCurrentUser, useDispatchSignOut } from 'src/hooks';
 import { PopoverMenu, Hidden } from 'src/components';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -13,7 +13,7 @@ import {
 const UserMenu = () => {
   const theme = useTheme();
   const user = useCurrentUser();
-  const signOut = useSignOut();
+  const signOut = useDispatchSignOut();
   const isAuthenticated = !!user;
   const userMenuItems = [
     {
