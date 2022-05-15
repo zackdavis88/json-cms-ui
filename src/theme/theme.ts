@@ -5,7 +5,6 @@ import grey from '@mui/material/colors/grey';
 import red from '@mui/material/colors/red';
 import green from '@mui/material/colors/green';
 import amber from '@mui/material/colors/amber';
-import common from '@mui/material/colors/common';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -32,7 +31,6 @@ const theme = createTheme({
       light: indigo['700'],
       main: indigo['800'],
       dark: indigo['900'],
-      contrastText: common.white,
     },
     secondary: {
       light: grey['300'],

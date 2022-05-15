@@ -2,7 +2,7 @@ import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, SIGN_OUT } from 'src/store/ac
 import { TOKEN_HEADER } from 'src/constants';
 import { Action as ReduxAction } from '@reduxjs/toolkit';
 
-interface UserData {
+export interface UserData {
   username: string;
   displayName: string;
 }
