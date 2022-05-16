@@ -11,15 +11,13 @@ const Notification = () => {
   const { message, notificationType, showNotification } = useNotification();
   const hideNotification = useDispatchHideNotification();
   const router = useRouter();
-  const currentRoute = React.useRef<string>(router.pathname);
 
-  // Close open nofitifcations on route change.
   React.useEffect(() => {
-    if (currentRoute.current && router.pathname !== currentRoute.current) {
-      hideNotification();
-      currentRoute.current = router.pathname;
-    }
-  }, [hideNotification, router]);
+    router.events.on('routeChangeStart', hideNotification);
+    return () => {
+      router.events.off('routeChangeStart', hideNotification);
+    };
+  }, [router, hideNotification]);
 
   const handleClose = React.useCallback(() => {
     hideNotification();
