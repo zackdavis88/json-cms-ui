@@ -5,7 +5,9 @@ import { Brand, NavigationButtons, UserMenu, ChangePasswordModal } from './compo
 
 const Navbar = () => {
   const [passwordChangeModalIsOpen, setPasswordChangeModalIsOpen] =
-    React.useState<boolean>(true);
+    React.useState<boolean>(false);
+
+  const handlePasswordChangeModalOpen = () => setPasswordChangeModalIsOpen(true);
   return (
     <>
       <NavbarLayout>
@@ -16,7 +18,7 @@ const Navbar = () => {
           justifyContent="flex-start"
           width="100%"
         >
-          <NavigationButtons />
+          <NavigationButtons onPasswordChangeModalOpen={handlePasswordChangeModalOpen} />
         </Box>
         <Box
           display="flex"
@@ -34,7 +36,7 @@ const Navbar = () => {
           justifyContent="flex-end"
           width="100%"
         >
-          <UserMenu />
+          <UserMenu onPasswordChangeModalOpen={handlePasswordChangeModalOpen} />
         </Box>
       </NavbarLayout>
       <ChangePasswordModal

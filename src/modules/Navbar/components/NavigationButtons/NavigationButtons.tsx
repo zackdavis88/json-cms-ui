@@ -9,7 +9,11 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useCurrentUser } from 'src/hooks';
 
-const NavigationButtons = () => {
+interface NavigationButtonsProps {
+  onPasswordChangeModalOpen: () => void;
+}
+
+const NavigationButtons = ({ onPasswordChangeModalOpen }: NavigationButtonsProps) => {
   const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(false);
   const handleSidebarOpen = () => setSidebarOpen(true);
   const handleSidebarClose = () => setSidebarOpen(false);
@@ -54,6 +58,7 @@ const NavigationButtons = () => {
         anchor="left"
         open={sidebarOpen}
         handleClose={handleSidebarClose}
+        onPasswordChangeModalOpen={onPasswordChangeModalOpen}
       />
     </>
   );

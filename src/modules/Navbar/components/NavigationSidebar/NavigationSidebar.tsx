@@ -6,9 +6,15 @@ import { ROUTES } from 'src/constants';
 
 interface NavigationSidebarProps extends DrawerProps {
   handleClose: () => void;
+  onPasswordChangeModalOpen: () => void;
 }
 
-const NavigationSidebar = ({ anchor, open, handleClose }: NavigationSidebarProps) => {
+const NavigationSidebar = ({
+  anchor,
+  open,
+  handleClose,
+  onPasswordChangeModalOpen,
+}: NavigationSidebarProps) => {
   React.useEffect(() => {
     const handleWindowResize = () => {
       if (open) {
@@ -43,7 +49,10 @@ const NavigationSidebar = ({ anchor, open, handleClose }: NavigationSidebarProps
         >
           Fragments
         </NavigationSidebarListItemButton>
-        <AccountActions handleClose={handleClose} />
+        <AccountActions
+          handleClose={handleClose}
+          onPasswordChangeModalOpen={onPasswordChangeModalOpen}
+        />
       </Box>
     </NavigationSidebarLayout>
   );

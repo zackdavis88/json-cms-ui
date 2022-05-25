@@ -9,9 +9,14 @@ import { useDispatchSignOut } from 'src/hooks';
 interface CollapsibleActionsProps {
   handleClose: () => void;
   isOpen: boolean;
+  onPasswordChangeModalOpen: () => void;
 }
 
-const CollapsibleActions = ({ handleClose, isOpen }: CollapsibleActionsProps) => {
+const CollapsibleActions = ({
+  handleClose,
+  isOpen,
+  onPasswordChangeModalOpen,
+}: CollapsibleActionsProps) => {
   const theme = useTheme();
   const signOut = useDispatchSignOut();
   const handleSignOut = React.useCallback(() => {
@@ -24,7 +29,7 @@ const CollapsibleActions = ({ handleClose, isOpen }: CollapsibleActionsProps) =>
         <NavigationSidebarListItemButton
           handleClose={handleClose}
           onClick={() => {
-            console.log('Change Password Clicked');
+            onPasswordChangeModalOpen();
             handleClose();
           }}
           labelDisplay="flex"
