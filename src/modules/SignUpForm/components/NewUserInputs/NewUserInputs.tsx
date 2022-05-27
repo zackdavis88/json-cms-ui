@@ -23,12 +23,6 @@ interface NewUserInputsProps {
 
 const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsProps) => {
   const theme = useTheme();
-  const inputToFocus = React.useRef<HTMLInputElement>();
-  React.useEffect(() => {
-    if (inputToFocus.current) {
-      inputToFocus.current.focus();
-    }
-  }, []);
   return (
     <>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
@@ -42,7 +36,7 @@ const NewUserInputs = ({ username, password, confirmPassword }: NewUserInputsPro
           error={!!username.error}
           helperText={username.error}
           required
-          inputRef={inputToFocus}
+          autoFocus
         />
       </Box>
       <Box display="flex" width="100%" marginBottom={theme.spacing(1)}>
