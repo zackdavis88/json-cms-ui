@@ -5,4 +5,5 @@ export { default as useDispatchSignOut } from './useDispatchSignOut';
 export { default as useDispatchCreateUser } from './useDispatchCreateUser';
 export { default as useDispatchShowNotification } from './useDispatchShowNotification';
 export { default as useDispatchHideNotification } from './useDispatchHideNotification';
+export { default as useDispatchChangePassword } from './useDispatchChangePassword';
 export { default as useUserLoading } from './useUserLoading';
