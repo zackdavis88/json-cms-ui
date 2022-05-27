@@ -19,6 +19,17 @@ const Notification = () => {
     };
   }, [router, hideNotification]);
 
+  React.useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.code === 'Escape' && showNotification) {
+        hideNotification();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [hideNotification, showNotification]);
+
   const handleClose = React.useCallback(() => {
     hideNotification();
   }, [hideNotification]);
