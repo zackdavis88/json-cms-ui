@@ -1,8 +1,11 @@
 import React from 'react';
 import { ActionButtons, NewUserInputs } from './components';
 import { SignUpFormLayout } from './layout';
-import { useDispatchCreateUser, useDispatchShowNotification } from 'src/hooks';
-import { useUserLoading } from './hooks';
+import {
+  useDispatchCreateUser,
+  useDispatchShowNotification,
+  useUserLoading,
+} from 'src/hooks';
 
 interface FormInputState {
   value: string;

@@ -8,7 +8,13 @@ export {
   authenticate,
   signOut,
 } from './auth';
-export { USER_REQUEST, USER_SUCCESS, USER_FAILURE, createUser } from './user';
+export {
+  USER_REQUEST,
+  USER_SUCCESS,
+  USER_FAILURE,
+  createUser,
+  changePassword,
+} from './user';
 export {
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,

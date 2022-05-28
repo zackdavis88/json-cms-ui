@@ -10,7 +10,11 @@ import {
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  onPasswordChangeModalOpen: () => void;
+}
+
+const UserMenu = ({ onPasswordChangeModalOpen }: UserMenuProps) => {
   const theme = useTheme();
   const user = useCurrentUser();
   const signOut = useDispatchSignOut();
@@ -19,9 +23,7 @@ const UserMenu = () => {
     {
       startIcon: <FontAwesomeIcon icon={faKey} fixedWidth />,
       label: 'Change Password',
-      onClick: () => {
-        console.log('Change Password Clicked');
-      },
+      onClick: onPasswordChangeModalOpen,
     },
     {
       startIcon: <FontAwesomeIcon icon={faRightFromBracket} fixedWidth />,
