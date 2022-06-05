@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 
 const NavigationButton = ({ children, href, ...props }: ButtonProps) => {
   const router = useRouter();
-  const isActivePath = router.pathname === href;
+
+  const isActivePath = href && router.pathname.startsWith(href);
 
   const navigationButton = (
     <StyledButton href={href} {...props}>
