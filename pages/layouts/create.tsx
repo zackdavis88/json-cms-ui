@@ -1,9 +1,17 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { getAuthToken } from 'src/utils';
+import Head from 'next/head';
 
 function LayoutCreatePage() {
-  return <div>Layout Create Page</div>;
+  return (
+    <>
+      <Head>
+        <title>JSON CMS - Create Layout</title>
+      </Head>
+      <div>Layout Create Page</div>
+    </>
+  );
 }
 
 // TODO: this SSR method is a placeholder. It will be replaced once this page starts development.

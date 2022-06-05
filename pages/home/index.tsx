@@ -7,7 +7,9 @@ import { NavigationCards } from 'src/modules';
 function HomePage() {
   return (
     <>
-      <Head>JSON CMS - Home</Head>
+      <Head>
+        <title>JSON CMS - Home</title>
+      </Head>
       <NavigationCards />
     </>
   );
