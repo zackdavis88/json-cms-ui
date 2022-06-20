@@ -24,7 +24,7 @@ const NewBlueprintLayout = ({
       <SectionHeader showDivider title="New Blueprint">
         <NewBlueprintActions />
       </SectionHeader>
-      <Box marginTop={theme.spacing(3)}>
+      <Box marginTop={theme.spacing(3)} maxWidth={`${theme.breakpoints.values.md}px`}>
         <TextField
           id="blueprint-name"
           label="Blueprint Name"

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { NewBlueprintLayout } from './layout';
 import { BlueprintFieldAccordion } from './components';
 
-enum TreeNodeTypes {
+export enum TreeNodeTypes {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
   BOOLEAN = 'BOOLEAN',
@@ -16,12 +16,14 @@ enum TreeNodeTypes {
 
 export interface TreeNodeValue {
   id: string;
+  parentId?: string;
   name: string;
   type: TreeNodeTypes;
-  isRequired?: boolean;
-  isInteger?: boolean;
-  min?: number;
-  max?: number;
+  isRequired: boolean;
+  isInteger: boolean;
+  regex: string;
+  min: number;
+  max: number;
   arrayOf?: string;
   children?: string[];
 }
@@ -49,7 +51,16 @@ const NewBlueprint = () => {
       const newId = uuidv4();
       setTreeNodeValues({
         ...treeNodeValues,
-        [newId]: { id: newId, name: '', type: TreeNodeTypes.STRING },
+        [newId]: {
+          id: newId,
+          name: '',
+          type: TreeNodeTypes.STRING,
+          isRequired: false,
+          isInteger: false,
+          regex: '',
+          min: 0,
+          max: 0,
+        },
       });
 
       if (isRoot) {
@@ -77,7 +88,11 @@ const NewBlueprint = () => {
       {rootNodes.map((nodeId) => {
         const nodeValues = treeNodeValues[nodeId];
         return nodeValues ? (
-          <Box key={nodeId} marginBottom={theme.spacing(2)}>
+          <Box
+            key={nodeId}
+            marginBottom={theme.spacing(2)}
+            maxWidth={`${theme.breakpoints.values.md}px`}
+          >
             <BlueprintFieldAccordion
               treeNode={nodeValues}
               addOrUpdateTreeNode={addOrUpdateTreeNode}
