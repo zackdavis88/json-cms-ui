@@ -1,22 +1,19 @@
 import React from 'react';
-import { Box, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { SectionHeader } from 'src/components';
-import { NewBlueprintActions, FieldsActions } from 'src/modules/NewBlueprint/components';
+import {
+  NewBlueprintActions,
+  FieldsActions,
+  NameInput,
+} from 'src/modules/NewBlueprint/components';
 
 interface NewBlueprintLayoutProps {
   children: React.ReactNode;
   nameInputRef: React.MutableRefObject<HTMLInputElement | undefined>;
-  onAddFieldClick: (isRoot: boolean) => void;
-  isRoot: boolean;
 }
 
-const NewBlueprintLayout = ({
-  children,
-  nameInputRef,
-  onAddFieldClick,
-  isRoot,
-}: NewBlueprintLayoutProps) => {
+const NewBlueprintLayout = ({ children, nameInputRef }: NewBlueprintLayoutProps) => {
   const theme = useTheme();
 
   return (
@@ -25,20 +22,11 @@ const NewBlueprintLayout = ({
         <NewBlueprintActions />
       </SectionHeader>
       <Box marginTop={theme.spacing(3)} maxWidth={`${theme.breakpoints.values.md}px`}>
-        <TextField
-          id="blueprint-name"
-          label="Blueprint Name"
-          variant="filled"
-          type="text"
-          fullWidth
-          required
-          inputProps={{ maxLength: 100 }}
-          inputRef={nameInputRef}
-        />
+        <NameInput nameInputRef={nameInputRef} />
       </Box>
       <Box marginTop={theme.spacing(4)}>
         <SectionHeader showDivider title="Fields">
-          <FieldsActions onAddFieldClick={onAddFieldClick} isRoot={isRoot} />
+          <FieldsActions />
         </SectionHeader>
         <Box marginTop={theme.spacing(3)}>{children}</Box>
       </Box>

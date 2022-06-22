@@ -17,17 +17,14 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { TreeNodeValue, TreeNodeTypes } from 'src/modules/NewBlueprint/NewBlueprint';
+import { BlueprintField, BlueprintFieldTypes } from 'src/store/actions';
+/*
+  TODO:
 
+  Break this component down more, its currently in prototype mode.
+*/
 interface AccordionDetailsProps {
-  id: TreeNodeValue['id'];
-  name: TreeNodeValue['name'];
-  type: TreeNodeValue['type'];
-  isRequired: boolean;
-  isInteger: boolean;
-  max: number;
-  min: number;
-  regex: string;
+  field: BlueprintField;
   onNameChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
@@ -41,13 +38,7 @@ interface AccordionDetailsProps {
 }
 
 const AccordionDetails = ({
-  id,
-  isInteger,
-  isRequired,
-  max,
-  min,
-  name,
-  regex,
+  field,
   onFieldRemoveClick,
   onMaxChange,
   onMinChange,
@@ -56,15 +47,15 @@ const AccordionDetails = ({
   onIsIntegerChange,
   onIsRequiredChange,
   onRegexChange,
-  type,
 }: AccordionDetailsProps) => {
   const theme = useTheme();
-  const showIsInteger = type === TreeNodeTypes.NUMBER;
+  const { id, name, type, isRequired, isInteger, min, max, regex } = field;
+  const showIsInteger = type === BlueprintFieldTypes.NUMBER;
   const showRange =
-    type === TreeNodeTypes.STRING ||
-    type === TreeNodeTypes.NUMBER ||
-    type === TreeNodeTypes.ARRAY;
-  const showRegex = type === TreeNodeTypes.STRING;
+    type === BlueprintFieldTypes.STRING ||
+    type === BlueprintFieldTypes.NUMBER ||
+    type === BlueprintFieldTypes.ARRAY;
+  const showRegex = type === BlueprintFieldTypes.STRING;
   return (
     <MUIAccordionDetails>
       <Box display="flex" flexDirection="column" marginTop={theme.spacing(2)}>
@@ -86,7 +77,6 @@ const AccordionDetails = ({
               fullWidth
               required
               inputProps={{ maxLength: 100 }}
-              autoFocus={!name}
               value={name}
               onChange={onNameChange}
             />
@@ -102,12 +92,12 @@ const AccordionDetails = ({
                 required
                 fullWidth
               >
-                <MenuItem value={TreeNodeTypes.STRING}>String</MenuItem>
-                <MenuItem value={TreeNodeTypes.NUMBER}>Number</MenuItem>
-                <MenuItem value={TreeNodeTypes.BOOLEAN}>Boolean</MenuItem>
-                <MenuItem value={TreeNodeTypes.DATE}>Date</MenuItem>
-                <MenuItem value={TreeNodeTypes.ARRAY}>Array</MenuItem>
-                <MenuItem value={TreeNodeTypes.OBJECT}>Object</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.STRING}>String</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.NUMBER}>Number</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.BOOLEAN}>Boolean</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.DATE}>Date</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.ARRAY}>Array</MenuItem>
+                <MenuItem value={BlueprintFieldTypes.OBJECT}>Object</MenuItem>
               </Select>
             </FormControl>
           </Box>

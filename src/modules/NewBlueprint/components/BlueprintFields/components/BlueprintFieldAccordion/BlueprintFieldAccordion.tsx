@@ -1,54 +1,59 @@
 import React from 'react';
 import { Accordion, SelectChangeEvent } from '@mui/material';
 import { AccordionSummary, AccordionDetails } from './components';
-import { TreeNodeValue, TreeNodeTypes } from 'src/modules/NewBlueprint/NewBlueprint';
+import { BlueprintFieldTypes } from 'src/store/actions';
+import {
+  useDispatchUpdateBlueprintField,
+  useDispatchRemoveBlueprintField,
+  useBlueprintField,
+} from 'src/hooks';
 
 interface BlueprintFieldAccordionProps {
-  treeNode: TreeNodeValue;
-  addOrUpdateTreeNode: (isRoot: boolean, treeNode?: TreeNodeValue) => void;
-  removeTreeNode: (treeNodeId: TreeNodeValue['id']) => void;
+  fieldId: string;
 }
 
-const BlueprintFieldAccordion = ({
-  addOrUpdateTreeNode,
-  removeTreeNode,
-  treeNode,
-}: BlueprintFieldAccordionProps) => {
-  const handleNameChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
+  const updateBlueprintField = useDispatchUpdateBlueprintField();
+  const removeBlueprintField = useDispatchRemoveBlueprintField();
+  const field = useBlueprintField(fieldId);
+
+  if (!field) {
+    return null;
+  }
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateBlueprintField({
+      ...field,
       name: event.target.value,
     });
   };
 
   const handleTypeChange = (event: SelectChangeEvent) => {
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
-      type: event.target.value as TreeNodeTypes,
+    updateBlueprintField({
+      ...field,
+      type: event.target.value as BlueprintFieldTypes,
     });
   };
 
   const handleIsRequiredChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+    updateBlueprintField({
+      ...field,
       isRequired: event.target.checked,
     });
   };
 
   const handleIsIntegerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+    updateBlueprintField({
+      ...field,
       isInteger: event.target.checked,
     });
   };
 
   const handleMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const max = Number(event.target.value) < 0 ? 0 : Number(event.target.value);
-    const min = max && max < treeNode.min ? max : treeNode.min;
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+    const min = max && max < field.min ? max : field.min;
+    updateBlueprintField({
+      ...field,
       min,
       max,
     });
@@ -56,37 +61,30 @@ const BlueprintFieldAccordion = ({
 
   const handleMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const min = Number(event.target.value) < 0 ? 0 : Number(event.target.value);
-    const max = min && min > treeNode.max ? min : treeNode.max;
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+    const max = min && min > field.max ? min : field.max;
+    updateBlueprintField({
+      ...field,
       min,
       max,
     });
   };
 
   const handleRegexChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    addOrUpdateTreeNode(true, {
-      ...treeNode,
+    updateBlueprintField({
+      ...field,
       regex: event.target.value,
     });
   };
 
   const handleFieldRemoveClick = () => {
-    removeTreeNode(treeNode.id);
+    removeBlueprintField(field);
   };
 
   return (
     <Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }}>
-      <AccordionSummary id={treeNode.id} name={treeNode.name} type={treeNode.type} />
+      <AccordionSummary id={field.id} name={field.name} type={field.type} />
       <AccordionDetails
-        id={treeNode.id}
-        name={treeNode.name}
-        type={treeNode.type}
-        isRequired={treeNode.isRequired}
-        isInteger={treeNode.isInteger}
-        max={treeNode.max}
-        min={treeNode.min}
-        regex={treeNode.regex}
+        field={field}
         onFieldRemoveClick={handleFieldRemoveClick}
         onNameChange={handleNameChange}
         onTypeChange={handleTypeChange}

@@ -3,12 +3,12 @@ import { AccordionSummary as MUIAccordionSummary, Box, Typography } from '@mui/m
 import { styled } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { TreeNodeValue } from 'src/modules/NewBlueprint/NewBlueprint';
+import { BlueprintField } from 'src/store/actions';
 
 interface AccordionSummaryProps {
-  id: TreeNodeValue['id'];
-  name: TreeNodeValue['name'];
-  type: TreeNodeValue['type'];
+  id: BlueprintField['id'];
+  name: BlueprintField['name'];
+  type: BlueprintField['type'];
 }
 
 const AccordionSummary = ({ id, name, type }: AccordionSummaryProps) => {
