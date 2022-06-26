@@ -51,7 +51,7 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
 
   const handleMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const max = Number(event.target.value) < 0 ? 0 : Number(event.target.value);
-    const min = max && max < field.min ? max : field.min;
+    const min = max < field.min ? max : field.min;
     updateBlueprintField({
       ...field,
       min,
@@ -61,7 +61,7 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
 
   const handleMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const min = Number(event.target.value) < 0 ? 0 : Number(event.target.value);
-    const max = min && min > field.max ? min : field.max;
+    const max = min > field.max ? min : field.max;
     updateBlueprintField({
       ...field,
       min,

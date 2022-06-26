@@ -1,11 +1,27 @@
 import React from 'react';
 import { useBlueprintFieldView } from 'src/hooks';
-import { RootFields } from './components';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { BlueprintFieldAccordion } from './components';
 
 const BlueprintFields = () => {
-  const fieldView = useBlueprintFieldView();
-  // TODO: Handle non-root view...or maybe combine it all into one component? Ensure performance does not drop below where its currently at.
-  return fieldView === 'root' ? <RootFields /> : null;
+  const fields = useBlueprintFieldView();
+  const theme = useTheme();
+  return (
+    <Box>
+      {fields.map((fieldId) => {
+        return (
+          <Box
+            key={fieldId}
+            marginBottom={theme.spacing(2)}
+            maxWidth={`${theme.breakpoints.values.md}px`}
+          >
+            <BlueprintFieldAccordion fieldId={fieldId} />
+          </Box>
+        );
+      })}
+    </Box>
+  );
 };
 
 export default BlueprintFields;
