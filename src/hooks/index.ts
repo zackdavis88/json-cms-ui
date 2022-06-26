@@ -14,6 +14,5 @@ export { default as useStore } from './useStore';
 export { default as useCurrentUser } from './useCurrentUser';
 export { default as useUserLoading } from './useUserLoading';
 export { default as useBlueprintName } from './useBlueprintName';
-export { default as useBlueprintRootFields } from './useBlueprintRootFields';
 export { default as useBlueprintField } from './useBlueprintField';
 export { default as useBlueprintFieldView } from './useBlueprintFieldView';

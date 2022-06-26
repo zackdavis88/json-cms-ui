@@ -19,3 +19,4 @@ export { updateBlueprintName } from './updateName';
 export { updateBlueprintField } from './updateField';
 export { removeBlueprintField } from './removeField';
 export { addBlueprintField } from './addField';
+export { updateBlueprintFieldView } from './updateFieldView';

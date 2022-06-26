@@ -41,5 +41,6 @@ export {
   updateBlueprintField,
   removeBlueprintField,
   addBlueprintField,
+  updateBlueprintFieldView,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';
