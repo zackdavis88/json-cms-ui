@@ -4,14 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/material/styles';
 import { ActionsContainer } from 'src/modules/NewBlueprint/components';
+import { useAddFieldButton } from 'src/modules/NewBlueprint/hooks';
 import { useDispatchAddBlueprintField } from 'src/hooks';
 
 const FieldsActions = () => {
   const theme = useTheme();
   const addBlueprintField = useDispatchAddBlueprintField();
+  const { disabled } = useAddFieldButton();
   return (
     <ActionsContainer>
-      <Button variant="contained" color="success" onClick={() => addBlueprintField()}>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={addBlueprintField}
+        disabled={disabled}
+      >
         <Box component="span" marginRight={theme.spacing(1)}>
           <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
         </Box>
