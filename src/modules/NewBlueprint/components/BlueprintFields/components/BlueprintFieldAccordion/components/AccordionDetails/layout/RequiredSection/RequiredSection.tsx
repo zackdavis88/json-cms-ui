@@ -17,15 +17,17 @@ interface RequiredSectionProps {
   type: BlueprintFieldTypes;
   nameInputProps: TextFieldProps;
   typeSelectProps: SelectProps;
+  onFieldViewChange: () => void;
+  hasChildren: boolean;
 }
 
-// TODO: This is where you left off. Lets update the Manage button to be contained/outlined based on if the field has nested fields or not.
-//       Create the dispatch method for updating the field view within the store.
 const RequiredSection = ({
   fieldId,
   type,
   nameInputProps,
   typeSelectProps,
+  onFieldViewChange,
+  hasChildren,
 }: RequiredSectionProps) => {
   const theme = useTheme();
   const showManageButton =
@@ -65,7 +67,11 @@ const RequiredSection = ({
       </Box>
       {showManageButton && (
         <Box marginTop={theme.spacing(2)}>
-          <Button variant="outlined" color="primary" onClick={() => {}}>
+          <Button
+            variant={hasChildren ? 'contained' : 'outlined'}
+            color="primary"
+            onClick={onFieldViewChange}
+          >
             Manage Fields
           </Button>
         </Box>

@@ -5,6 +5,7 @@ import { BlueprintFieldTypes } from 'src/store/actions';
 import {
   useDispatchUpdateBlueprintField,
   useDispatchRemoveBlueprintField,
+  useDispatchUpdateBlueprintFieldView,
   useBlueprintField,
 } from 'src/hooks';
 
@@ -15,6 +16,7 @@ interface BlueprintFieldAccordionProps {
 const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
   const updateBlueprintField = useDispatchUpdateBlueprintField();
   const removeBlueprintField = useDispatchRemoveBlueprintField();
+  const updateBlueprintFieldView = useDispatchUpdateBlueprintFieldView();
   const field = useBlueprintField(fieldId);
 
   if (!field) {
@@ -80,6 +82,10 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
     removeBlueprintField(field);
   };
 
+  const handleFieldViewChange = () => {
+    updateBlueprintFieldView(field.id);
+  };
+
   return (
     <Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }}>
       <AccordionSummary id={field.id} name={field.name} type={field.type} />
@@ -93,6 +99,7 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
         onMaxChange={handleMaxChange}
         onMinChange={handleMinChange}
         onRegexChange={handleRegexChange}
+        onFieldViewChange={handleFieldViewChange}
       />
     </Accordion>
   );

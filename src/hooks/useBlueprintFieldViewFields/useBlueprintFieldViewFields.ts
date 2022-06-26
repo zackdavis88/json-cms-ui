@@ -2,7 +2,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from 'src/store/store';
 import { BlueprintFieldView, BlueprintFieldTypes } from 'src/store/actions';
 
-function useBlueprintFieldView() {
+function useBlueprintFieldViewFields() {
   const fieldView: BlueprintFieldView = useSelector(
     ({ blueprint }: RootState) => blueprint.fieldView,
   );
@@ -22,4 +22,4 @@ function useBlueprintFieldView() {
   return fields;
 }
 
-export default useBlueprintFieldView;
+export default useBlueprintFieldViewFields;

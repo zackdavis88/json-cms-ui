@@ -15,4 +15,4 @@ export { default as useCurrentUser } from './useCurrentUser';
 export { default as useUserLoading } from './useUserLoading';
 export { default as useBlueprintName } from './useBlueprintName';
 export { default as useBlueprintField } from './useBlueprintField';
-export { default as useBlueprintFieldView } from './useBlueprintFieldView';
+export { default as useBlueprintFieldViewFields } from './useBlueprintFieldViewFields';

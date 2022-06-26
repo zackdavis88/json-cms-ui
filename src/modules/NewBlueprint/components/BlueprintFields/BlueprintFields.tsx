@@ -1,11 +1,11 @@
 import React from 'react';
-import { useBlueprintFieldView } from 'src/hooks';
+import { useBlueprintFieldViewFields } from 'src/hooks';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { BlueprintFieldAccordion } from './components';
 
 const BlueprintFields = () => {
-  const fields = useBlueprintFieldView();
+  const fields = useBlueprintFieldViewFields();
   const theme = useTheme();
   return (
     <Box>

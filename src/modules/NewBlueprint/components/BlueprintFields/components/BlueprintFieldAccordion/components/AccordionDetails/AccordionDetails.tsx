@@ -20,6 +20,7 @@ interface AccordionDetailsProps {
   onMaxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onMinChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onRegexChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFieldViewChange: () => void;
 }
 
 const AccordionDetails = ({
@@ -32,9 +33,12 @@ const AccordionDetails = ({
   onIsIntegerChange,
   onIsRequiredChange,
   onRegexChange,
+  onFieldViewChange,
 }: AccordionDetailsProps) => {
   const theme = useTheme();
-  const { id, name, type, isRequired, isInteger, min, max, regex } = field;
+  const { id, name, type, isRequired, isInteger, min, max, regex, arrayOf, children } =
+    field;
+  const hasChildren = !!(arrayOf || children.length);
 
   return (
     <MUIAccordionDetails>
@@ -44,6 +48,8 @@ const AccordionDetails = ({
           type={type}
           nameInputProps={{ value: name, onChange: onNameChange }}
           typeSelectProps={{ value: type, onChange: onTypeChange }}
+          onFieldViewChange={onFieldViewChange}
+          hasChildren={hasChildren}
         />
         <OptionsSection
           fieldId={id}
