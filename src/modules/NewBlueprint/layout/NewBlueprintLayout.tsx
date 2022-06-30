@@ -6,6 +6,7 @@ import {
   NewBlueprintActions,
   FieldsActions,
   NameInput,
+  FieldBreadcrumbs,
 } from 'src/modules/NewBlueprint/components';
 
 interface NewBlueprintLayoutProps {
@@ -27,6 +28,7 @@ const NewBlueprintLayout = ({ children, nameInputRef }: NewBlueprintLayoutProps)
       <Box marginTop={theme.spacing(4)}>
         <SectionHeader showDivider title="Fields">
           <FieldsActions />
+          <FieldBreadcrumbs />
         </SectionHeader>
         <Box marginTop={theme.spacing(3)}>{children}</Box>
       </Box>
