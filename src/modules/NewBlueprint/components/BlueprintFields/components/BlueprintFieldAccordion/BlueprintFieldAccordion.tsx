@@ -26,7 +26,7 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateBlueprintField({
       ...field,
-      name: event.target.value,
+      name: event.target.value.trim(),
     });
   };
 

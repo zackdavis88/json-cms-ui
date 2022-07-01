@@ -21,7 +21,7 @@ const NameInput = ({ nameInputRef }: NameInputProps) => {
       inputProps={{ maxLength: 100 }}
       inputRef={nameInputRef}
       value={name}
-      onChange={(e) => updateBlueprintName(e.target.value)}
+      onChange={(e) => updateBlueprintName(e.target.value.trim())}
     />
   );
 };
