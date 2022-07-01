@@ -7,11 +7,15 @@ import { ROUTES } from 'src/constants';
 import { useTheme } from '@mui/material/styles';
 import { ActionsContainer } from 'src/modules/NewBlueprint/components';
 
-const HeaderActions = () => {
+interface HeaderActionsProps {
+  handleBackdropOpen: () => void;
+}
+
+const HeaderActions = ({ handleBackdropOpen }: HeaderActionsProps) => {
   const theme = useTheme();
   return (
     <ActionsContainer>
-      <Button variant="contained">
+      <Button variant="contained" onClick={handleBackdropOpen}>
         <Box component="span" marginRight={theme.spacing(1)}>
           <FontAwesomeIcon icon={faFloppyDisk} fixedWidth size="sm" />
         </Box>

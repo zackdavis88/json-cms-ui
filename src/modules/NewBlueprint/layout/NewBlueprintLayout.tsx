@@ -12,15 +12,20 @@ import {
 interface NewBlueprintLayoutProps {
   children: React.ReactNode;
   nameInputRef: React.MutableRefObject<HTMLInputElement | undefined>;
+  handleBackdropOpen: () => void;
 }
 
-const NewBlueprintLayout = ({ children, nameInputRef }: NewBlueprintLayoutProps) => {
+const NewBlueprintLayout = ({
+  children,
+  handleBackdropOpen,
+  nameInputRef,
+}: NewBlueprintLayoutProps) => {
   const theme = useTheme();
 
   return (
     <Box width="100%" marginTop={theme.spacing(2)} paddingX={theme.spacing(1)}>
       <SectionHeader showDivider title="New Blueprint">
-        <NewBlueprintActions />
+        <NewBlueprintActions handleBackdropOpen={handleBackdropOpen} />
       </SectionHeader>
       <Box marginTop={theme.spacing(3)} maxWidth={`${theme.breakpoints.values.md}px`}>
         <NameInput nameInputRef={nameInputRef} />
