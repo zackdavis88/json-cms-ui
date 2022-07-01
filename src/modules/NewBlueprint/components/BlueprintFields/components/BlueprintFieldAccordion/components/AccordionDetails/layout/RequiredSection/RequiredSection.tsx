@@ -32,6 +32,7 @@ const RequiredSection = ({
   const theme = useTheme();
   const showManageButton =
     type === BlueprintFieldTypes.ARRAY || type === BlueprintFieldTypes.OBJECT;
+  const hasNameValue = !!nameInputProps.value;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -71,6 +72,7 @@ const RequiredSection = ({
             variant={hasChildren ? 'contained' : 'outlined'}
             color="primary"
             onClick={onFieldViewChange}
+            disabled={!hasNameValue}
           >
             Manage Fields
           </Button>
