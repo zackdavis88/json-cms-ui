@@ -23,7 +23,7 @@ const BreadcrumbButton = ({ fieldId, disabled = false }: BreadcrumbButtonProps) 
         disabled={disabled}
         disableTouchRipple
       >
-        {name}
+        <span>{name}</span>
       </StyledButton>
       <Box marginX={theme.spacing(1)}>
         <Divider orientation="vertical" />
@@ -37,6 +37,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
   textTransform: 'none',
   '&:disabled': {
     color: theme.palette.common.black,
+  },
+  '& > span': {
+    maxWidth: '300px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
   },
 }));
 
