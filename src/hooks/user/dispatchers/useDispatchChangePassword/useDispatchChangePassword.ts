@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { changePassword as changePasswordAction } from 'src/store/actions';
-import useCurrentUser from 'src/hooks/useCurrentUser';
+import { useCurrentUser } from 'src/hooks';
 
 interface ChangePasswordResponse {
   body: {

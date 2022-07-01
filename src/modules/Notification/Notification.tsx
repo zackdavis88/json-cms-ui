@@ -1,7 +1,6 @@
 import React from 'react';
 import { NotificationLayout } from './layout';
-import { useNotification } from './hooks';
-import { useDispatchHideNotification } from 'src/hooks';
+import { useNotification, useDispatchHideNotification } from 'src/hooks';
 import { useRouter } from 'next/router';
 
 /* TODO: Possible enhancements include: timed notifications that auto close and notifications that stay open

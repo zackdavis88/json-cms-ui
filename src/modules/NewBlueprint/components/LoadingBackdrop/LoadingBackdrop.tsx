@@ -2,7 +2,11 @@ import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { StyledBackdrop } from './components';
-import { useBlueprintName, useBlueprintFields, useBlueprintRootFields } from 'src/hooks';
+import {
+  useBlueprintName,
+  useBlueprintAllFields,
+  useBlueprintRootFields,
+} from 'src/hooks';
 
 interface LoadingBackdropProps {
   isOpen: boolean;
@@ -12,7 +16,7 @@ interface LoadingBackdropProps {
 const LoadingBackdrop = ({ isOpen, handleBackdropClose }: LoadingBackdropProps) => {
   const theme = useTheme();
   const name = useBlueprintName();
-  const fields = useBlueprintFields();
+  const fields = useBlueprintAllFields();
   const rootFields = useBlueprintRootFields();
 
   if (!isOpen) {
