@@ -15,4 +15,6 @@ export { default as useCurrentUser } from './useCurrentUser';
 export { default as useUserLoading } from './useUserLoading';
 export { default as useBlueprintName } from './useBlueprintName';
 export { default as useBlueprintField } from './useBlueprintField';
+export { default as useBlueprintFields } from './useBlueprintFields';
+export { default as useBlueprintRootFields } from './useBlueprintRootFields';
 export { default as useBlueprintFieldViewFields } from './useBlueprintFieldViewFields';
