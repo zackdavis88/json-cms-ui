@@ -3,11 +3,14 @@ export {
   BLUEPRINT_SUCCESS,
   BLUEPRINT_FAILURE,
   BLUEPRINT_NAME_UPDATE,
+  BLUEPRINT_NAME_ERROR_UPDATE,
   BLUEPRINT_ADD_FIELD,
   BLUEPRINT_UPDATE_FIELD,
+  BLUEPRINT_UPDATE_FIELD_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
   BlueprintFieldTypes,
+  BlueprintFieldErrorTypes,
 } from './types';
 import {
   BlueprintFieldView as _BlueprintFieldView,
@@ -20,3 +23,5 @@ export { updateBlueprintField } from './updateField';
 export { removeBlueprintField } from './removeField';
 export { addBlueprintField } from './addField';
 export { updateBlueprintFieldView } from './updateFieldView';
+export { updateBlueprintNameError } from './updateNameError';
+export { updateBlueprintFieldError } from './updateFieldError';

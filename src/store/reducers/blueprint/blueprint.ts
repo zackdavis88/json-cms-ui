@@ -1,17 +1,21 @@
 import {
   BLUEPRINT_NAME_UPDATE,
+  BLUEPRINT_NAME_ERROR_UPDATE,
   BLUEPRINT_ADD_FIELD,
   BLUEPRINT_UPDATE_FIELD,
+  BLUEPRINT_UPDATE_FIELD_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
   BlueprintField,
   BlueprintFieldView,
   BlueprintFieldTypes,
+  BlueprintFieldErrorTypes,
 } from 'src/store/actions';
 import { Action as ReduxAction } from '@reduxjs/toolkit';
 
 export interface BlueprintState {
   name: string;
+  nameError: string;
   fieldView: BlueprintFieldView;
   rootFields: BlueprintField['id'][];
   fields: {
@@ -23,6 +27,7 @@ interface BlueprintAction extends ReduxAction {
   field: BlueprintField;
   fieldView: BlueprintFieldView;
   name: string;
+  nameError: string;
   // TODO: request will probably also go here once we get to that.
 }
 
@@ -31,6 +36,7 @@ export const defaultState: BlueprintState = {
   fieldView: 'root',
   fields: {},
   rootFields: [],
+  nameError: '',
 };
 
 type BlueprintReducer = (
@@ -43,6 +49,13 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return {
         ...state,
         name: action.name,
+        nameError: '',
+      };
+    }
+    case BLUEPRINT_NAME_ERROR_UPDATE: {
+      return {
+        ...state,
+        nameError: action.nameError,
       };
     }
     case BLUEPRINT_UPDATE_FIELD_VIEW: {
@@ -68,6 +81,28 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         } else if (parentField.type === BlueprintFieldTypes.OBJECT) {
           parentField.children = parentField.children.concat(action.field.id);
         }
+
+        // Clear out any existing CHILDREN / NESTED errors along the tree.
+        if (parentField.errorType === BlueprintFieldErrorTypes.CHILDREN) {
+          delete parentField.errorType;
+          delete parentField.errorMessage;
+
+          // Travel the tree backwards from this node and clear any existing NESTED errors.
+          let parentId = parentField.parentId;
+          while (parentId) {
+            const parentField = { ...newState.fields[parentId] }; // This would be the parent of the parent.
+            delete parentField.errorType;
+            delete parentField.errorMessage;
+            newState.fields = {
+              ...newState.fields,
+              [parentId]: parentField,
+            };
+
+            parentId = parentField.parentId;
+          }
+        }
+
+        // Attach the new field and its updated parent.
         newState.fields = {
           ...newState.fields,
           [action.field.id]: { ...action.field, parentId: state.fieldView },
@@ -78,16 +113,52 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return newState;
     }
     case BLUEPRINT_UPDATE_FIELD: {
-      return {
+      const newState = { ...state };
+      newState.fields = {
+        ...newState.fields,
+        [action.field.id]: action.field,
+      };
+
+      return newState;
+    }
+    case BLUEPRINT_UPDATE_FIELD_ERROR: {
+      // This will attach an errorType/message to a specific field.
+      // Then it will traverse the tree and attach a NESTED error to all parents.
+      const fieldWithError = {
+        ...state.fields[action.field.id],
+        errorType: action.field.errorType,
+        errorMessage: action.field.errorMessage,
+      };
+      let newState = {
         ...state,
         fields: {
           ...state.fields,
-          [action.field.id]: action.field,
+          [action.field.id]: fieldWithError,
         },
       };
+
+      let parentId = fieldWithError.parentId;
+      while (parentId) {
+        const parentFieldWithError = {
+          ...newState.fields[parentId],
+          errorType: BlueprintFieldErrorTypes.NESTED,
+        };
+        newState = {
+          ...newState,
+          fields: {
+            ...newState.fields,
+            [parentId]: parentFieldWithError,
+          },
+        };
+
+        parentId = parentFieldWithError.parentId;
+      }
+
+      return newState;
     }
     case BLUEPRINT_REMOVE_FIELD: {
       const newState = { ...state };
+      const removedFieldHasError = newState.fields[action.field.id].errorType;
       delete newState.fields[action.field.id];
 
       if (state.fieldView === 'root') {
@@ -110,6 +181,31 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
             ...newState.fields[state.fieldView],
             children: newChildren,
           };
+        }
+
+        // If the removed field had an error, then we need to clean up the errors along the tree starting from the parent.
+        if (removedFieldHasError) {
+          delete parentField.errorType;
+          delete parentField.errorMessage;
+          newState.fields = {
+            ...newState.fields,
+            [state.fieldView]: parentField,
+          };
+
+          // Traverse the tree backwards and clear all errors along the path.
+          let parentId = parentField.parentId;
+          while (parentId) {
+            const parentField = newState.fields[parentId];
+            delete parentField.errorType;
+            delete parentField.errorMessage;
+
+            newState.fields = {
+              ...newState.fields,
+              [parentId]: parentField,
+            };
+
+            parentId = parentField.parentId;
+          }
         }
       }
 
