@@ -26,4 +26,6 @@ export {
   useDispatchUpdateBlueprintField,
   useDispatchRemoveBlueprintField,
   useDispatchUpdateBlueprintFieldView,
+  useDispatchUpdateBlueprintNameError,
+  useDispatchUpdateBlueprintFieldError,
 } from './blueprint';

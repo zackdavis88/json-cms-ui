@@ -12,4 +12,6 @@ export {
   useDispatchUpdateBlueprintField,
   useDispatchRemoveBlueprintField,
   useDispatchUpdateBlueprintFieldView,
+  useDispatchUpdateBlueprintNameError,
+  useDispatchUpdateBlueprintFieldError,
 } from './dispatchers';

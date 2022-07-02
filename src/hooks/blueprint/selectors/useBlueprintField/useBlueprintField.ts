@@ -26,6 +26,12 @@ function useBlueprintField(fieldId: string) {
   const arrayOf = useSelector(
     ({ blueprint }: RootState) => blueprint.fields[fieldId].arrayOf,
   );
+  const errorType = useSelector(
+    ({ blueprint }: RootState) => blueprint.fields[fieldId].errorType,
+  );
+  const errorMessage = useSelector(
+    ({ blueprint }: RootState) => blueprint.fields[fieldId].errorMessage,
+  );
 
   if (!id) {
     return null;
@@ -43,6 +49,8 @@ function useBlueprintField(fieldId: string) {
     regex,
     arrayOf,
     children,
+    errorType,
+    errorMessage,
   };
 }
 
