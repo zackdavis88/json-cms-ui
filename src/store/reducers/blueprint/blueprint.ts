@@ -119,6 +119,24 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         [action.field.id]: action.field,
       };
 
+      // If a field name was updated we need to clear any errors in the tree related to it.
+      const fieldNameWasUpdated =
+        state.fields[action.field.id].name !== action.field.name;
+      const fieldHadNameError =
+        state.fields[action.field.id].errorType === BlueprintFieldErrorTypes.NAME;
+
+      if (fieldNameWasUpdated && fieldHadNameError) {
+        let parentId = newState.fields[action.field.id].parentId;
+        while (parentId) {
+          const parentField = { ...newState.fields[parentId] };
+          delete parentField.errorType;
+          delete parentField.errorType;
+
+          newState.fields[parentId] = parentField;
+          parentId = parentField.parentId;
+        }
+      }
+
       return newState;
     }
     case BLUEPRINT_UPDATE_FIELD_ERROR: {
@@ -168,41 +186,34 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         newRootFields.splice(fieldIndex, 1);
         newState.rootFields = newRootFields;
       } else {
-        const parentField = newState.fields[state.fieldView];
-        if (parentField.type === BlueprintFieldTypes.ARRAY) {
+        const { type: parentFieldType, children: parentFieldChildren } =
+          newState.fields[state.fieldView];
+        if (parentFieldType === BlueprintFieldTypes.ARRAY) {
           // Cleanup parentField arrayOf if the removed field was the child of an array parent.
-          parentField.arrayOf = '';
-        } else if (parentField.type === BlueprintFieldTypes.OBJECT) {
+          newState.fields[state.fieldView].arrayOf = '';
+        } else if (parentFieldType === BlueprintFieldTypes.OBJECT) {
           // Cleanup parentField children if the removed field was the child of an object parent.
-          const newChildren = [...parentField.children];
+          const newChildren = [...parentFieldChildren];
           const fieldIndex = newChildren.indexOf(action.field.id);
           newChildren.splice(fieldIndex, 1);
-          newState.fields[state.fieldView] = {
-            ...newState.fields[state.fieldView],
-            children: newChildren,
-          };
+          newState.fields[state.fieldView].children = newChildren;
         }
 
         // If the removed field had an error, then we need to clean up the errors along the tree starting from the parent.
         if (removedFieldHasError) {
+          const parentField = { ...newState.fields[state.fieldView] };
           delete parentField.errorType;
           delete parentField.errorMessage;
-          newState.fields = {
-            ...newState.fields,
-            [state.fieldView]: parentField,
-          };
+          newState.fields[state.fieldView] = parentField;
 
           // Traverse the tree backwards and clear all errors along the path.
           let parentId = parentField.parentId;
           while (parentId) {
-            const parentField = newState.fields[parentId];
+            const parentField = { ...newState.fields[parentId] };
             delete parentField.errorType;
             delete parentField.errorMessage;
 
-            newState.fields = {
-              ...newState.fields,
-              [parentId]: parentField,
-            };
+            newState.fields[parentId] = parentField;
 
             parentId = parentField.parentId;
           }
