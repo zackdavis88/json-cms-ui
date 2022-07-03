@@ -6,19 +6,26 @@ import {
   Button,
   SelectProps,
   MenuItem,
+  Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { AccordionSectionHeader } from 'src/modules/NewBlueprint/components/BlueprintFields/components/BlueprintFieldAccordion/components';
-import { BlueprintFieldTypes } from 'src/store/actions';
+import {
+  BlueprintFieldTypes,
+  BlueprintField,
+  BlueprintFieldErrorTypes,
+} from 'src/store/actions';
 import { Select } from 'src/components';
 
 interface RequiredSectionProps {
-  fieldId: string;
-  type: BlueprintFieldTypes;
+  fieldId: BlueprintField['id'];
+  type: BlueprintField['type'];
   nameInputProps: TextFieldProps;
   typeSelectProps: SelectProps;
   onFieldViewChange: () => void;
   hasChildren: boolean;
+  errorType: BlueprintField['errorType'];
+  errorMessage: BlueprintField['errorMessage'];
 }
 
 const RequiredSection = ({
@@ -28,11 +35,17 @@ const RequiredSection = ({
   typeSelectProps,
   onFieldViewChange,
   hasChildren,
+  errorType,
+  errorMessage,
 }: RequiredSectionProps) => {
   const theme = useTheme();
   const showManageButton =
     type === BlueprintFieldTypes.ARRAY || type === BlueprintFieldTypes.OBJECT;
   const hasNameValue = !!nameInputProps.value;
+
+  const hasNameError = errorType === BlueprintFieldErrorTypes.NAME;
+  const hasChildrenError = errorType === BlueprintFieldErrorTypes.CHILDREN;
+  const hasNestedError = errorType === BlueprintFieldErrorTypes.NESTED;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -48,6 +61,8 @@ const RequiredSection = ({
           inputProps={{ maxLength: 100 }}
           value={nameInputProps.value}
           onChange={nameInputProps.onChange}
+          error={hasNameError}
+          helperText={hasNameError ? errorMessage : undefined}
         />
       </Box>
       <Box marginTop={theme.spacing(2)}>
@@ -70,12 +85,22 @@ const RequiredSection = ({
         <Box marginTop={theme.spacing(2)}>
           <Button
             variant={hasChildren ? 'contained' : 'outlined'}
-            color="primary"
+            color={hasChildrenError || hasNestedError ? 'error' : 'primary'}
             onClick={onFieldViewChange}
             disabled={!hasNameValue}
           >
             Manage Fields
           </Button>
+          {hasChildrenError && (
+            <Typography
+              variant="caption"
+              component="p"
+              color="error"
+              marginX={theme.spacing(1)}
+            >
+              {errorMessage}
+            </Typography>
+          )}
         </Box>
       )}
     </Box>

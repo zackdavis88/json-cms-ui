@@ -36,8 +36,20 @@ const AccordionDetails = ({
   onFieldViewChange,
 }: AccordionDetailsProps) => {
   const theme = useTheme();
-  const { id, name, type, isRequired, isInteger, min, max, regex, arrayOf, children } =
-    field;
+  const {
+    id,
+    name,
+    type,
+    isRequired,
+    isInteger,
+    min,
+    max,
+    regex,
+    arrayOf,
+    children,
+    errorType,
+    errorMessage,
+  } = field;
   const hasChildren = !!(arrayOf || children.length);
 
   return (
@@ -50,6 +62,8 @@ const AccordionDetails = ({
           typeSelectProps={{ value: type, onChange: onTypeChange }}
           onFieldViewChange={onFieldViewChange}
           hasChildren={hasChildren}
+          errorType={errorType}
+          errorMessage={errorMessage}
         />
         <OptionsSection
           fieldId={id}

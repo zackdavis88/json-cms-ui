@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accordion, SelectChangeEvent } from '@mui/material';
 import { AccordionSummary, AccordionDetails } from './components';
-import { BlueprintFieldTypes } from 'src/store/actions';
+import { BlueprintFieldTypes, BlueprintFieldErrorTypes } from 'src/store/actions';
 import {
   useDispatchUpdateBlueprintField,
   useDispatchRemoveBlueprintField,
@@ -24,10 +24,12 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
   }
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateBlueprintField({
-      ...field,
-      name: event.target.value.trim(),
-    });
+    const updatedField = { ...field, name: event.target.value.trim() };
+    if (updatedField.errorType === BlueprintFieldErrorTypes.NAME) {
+      delete updatedField.errorType;
+      delete updatedField.errorMessage;
+    }
+    updateBlueprintField(updatedField);
   };
 
   const handleTypeChange = (event: SelectChangeEvent) => {

@@ -7,7 +7,7 @@ interface NameInputProps {
 }
 
 const NameInput = ({ nameInputRef }: NameInputProps) => {
-  const name = useBlueprintName();
+  const { name, nameError } = useBlueprintName();
   const updateBlueprintName = useDispatchUpdateBlueprintName();
 
   return (
@@ -22,6 +22,8 @@ const NameInput = ({ nameInputRef }: NameInputProps) => {
       inputRef={nameInputRef}
       value={name}
       onChange={(e) => updateBlueprintName(e.target.value.trim())}
+      error={!!nameError}
+      helperText={nameError}
     />
   );
 };
