@@ -23,6 +23,7 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
     return null;
   }
 
+  const fieldHasError = !!field.errorType;
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedField = { ...field, name: event.target.value.trim() };
     if (updatedField.errorType === BlueprintFieldErrorTypes.NAME) {
@@ -90,7 +91,12 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
 
   return (
     <Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }}>
-      <AccordionSummary id={field.id} name={field.name} type={field.type} />
+      <AccordionSummary
+        id={field.id}
+        name={field.name}
+        type={field.type}
+        hasError={fieldHasError}
+      />
       <AccordionDetails
         field={field}
         onFieldRemoveClick={handleFieldRemoveClick}

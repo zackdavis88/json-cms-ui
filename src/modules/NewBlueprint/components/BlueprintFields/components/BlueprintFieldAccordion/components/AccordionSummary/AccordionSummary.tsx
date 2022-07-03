@@ -9,14 +9,16 @@ interface AccordionSummaryProps {
   id: BlueprintField['id'];
   name: BlueprintField['name'];
   type: BlueprintField['type'];
+  hasError: boolean;
 }
 
-const AccordionSummary = ({ id, name, type }: AccordionSummaryProps) => {
+const AccordionSummary = ({ id, name, type, hasError }: AccordionSummaryProps) => {
   return (
     <StyledAccordionSummary
       expandIcon={<FontAwesomeIcon icon={faChevronDown} fixedWidth size="sm" />}
       aria-controls={`${id}-content`}
       id={`${id}-header`}
+      className={hasError ? 'hasError' : ''}
     >
       <Box
         display="flex"
@@ -43,6 +45,7 @@ const StyledAccordionSummary = styled(MUIAccordionSummary)(({ theme }) => ({
   },
   '&.hasError': {
     backgroundColor: theme.palette.error.main,
+    color: theme.palette.common.white,
   },
 }));
 
