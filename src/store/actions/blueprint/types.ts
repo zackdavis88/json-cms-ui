@@ -14,6 +14,8 @@ export const BLUEPRINT_REMOVE_FIELD = 'BLUEPRINT_REMOVE_FIELD';
 
 export const BLUEPRINT_UPDATE_FIELD_VIEW = 'BLUEPRINT_UPDATE_FIELD_VIEW';
 
+export const BLUEPRINT_RESET_STATE = 'BLUEPRINT_RESET_STATE';
+
 // Typescript types.
 export enum BlueprintFieldTypes {
   STRING = 'STRING',

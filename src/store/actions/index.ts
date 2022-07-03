@@ -38,6 +38,7 @@ export {
   BLUEPRINT_UPDATE_FIELD_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
+  BLUEPRINT_RESET_STATE,
   BlueprintFieldTypes,
   BlueprintFieldErrorTypes,
   updateBlueprintName,
@@ -47,5 +48,6 @@ export {
   updateBlueprintFieldView,
   updateBlueprintNameError,
   updateBlueprintFieldError,
+  resetBlueprintState,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';

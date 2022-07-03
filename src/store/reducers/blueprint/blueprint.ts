@@ -6,6 +6,7 @@ import {
   BLUEPRINT_UPDATE_FIELD_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
+  BLUEPRINT_RESET_STATE,
   BlueprintField,
   BlueprintFieldView,
   BlueprintFieldTypes,
@@ -221,6 +222,9 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       }
 
       return newState;
+    }
+    case BLUEPRINT_RESET_STATE: {
+      return { ...defaultState };
     }
     default:
       return state;

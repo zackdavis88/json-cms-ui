@@ -9,6 +9,7 @@ export {
   BLUEPRINT_UPDATE_FIELD_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
+  BLUEPRINT_RESET_STATE,
   BlueprintFieldTypes,
   BlueprintFieldErrorTypes,
 } from './types';
@@ -25,3 +26,4 @@ export { addBlueprintField } from './addField';
 export { updateBlueprintFieldView } from './updateFieldView';
 export { updateBlueprintNameError } from './updateNameError';
 export { updateBlueprintFieldError } from './updateFieldError';
+export { resetBlueprintState } from './resetState';
