@@ -26,6 +26,7 @@ interface RequiredSectionProps {
   hasChildren: boolean;
   errorType: BlueprintField['errorType'];
   errorMessage: BlueprintField['errorMessage'];
+  showSelectArrayOption: boolean;
 }
 
 const RequiredSection = ({
@@ -37,6 +38,7 @@ const RequiredSection = ({
   hasChildren,
   errorType,
   errorMessage,
+  showSelectArrayOption,
 }: RequiredSectionProps) => {
   const theme = useTheme();
   const showManageButton =
@@ -77,7 +79,9 @@ const RequiredSection = ({
           <MenuItem value={BlueprintFieldTypes.NUMBER}>Number</MenuItem>
           <MenuItem value={BlueprintFieldTypes.BOOLEAN}>Boolean</MenuItem>
           <MenuItem value={BlueprintFieldTypes.DATE}>Date</MenuItem>
-          <MenuItem value={BlueprintFieldTypes.ARRAY}>Array</MenuItem>
+          {showSelectArrayOption && (
+            <MenuItem value={BlueprintFieldTypes.ARRAY}>Array</MenuItem>
+          )}
           <MenuItem value={BlueprintFieldTypes.OBJECT}>Object</MenuItem>
         </Select>
       </Box>

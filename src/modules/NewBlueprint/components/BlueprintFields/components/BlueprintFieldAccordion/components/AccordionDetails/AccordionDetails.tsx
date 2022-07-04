@@ -5,11 +5,15 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { BlueprintField } from 'src/store/actions';
+import { BlueprintField, BlueprintFieldTypes } from 'src/store/actions';
 import { RequiredSection, OptionsSection, DangerZoneSection } from './layout';
 
+interface BlueprintFieldWithParentType extends BlueprintField {
+  parentType?: BlueprintFieldTypes;
+}
+
 interface AccordionDetailsProps {
-  field: BlueprintField;
+  field: BlueprintFieldWithParentType;
   onNameChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
@@ -49,9 +53,10 @@ const AccordionDetails = ({
     children,
     errorType,
     errorMessage,
+    parentType,
   } = field;
   const hasChildren = !!(arrayOf || children.length);
-
+  const parentIsNotArrayType = parentType !== BlueprintFieldTypes.ARRAY;
   return (
     <MUIAccordionDetails>
       <Box display="flex" flexDirection="column" marginTop={theme.spacing(2)}>
@@ -64,6 +69,7 @@ const AccordionDetails = ({
           hasChildren={hasChildren}
           errorType={errorType}
           errorMessage={errorMessage}
+          showSelectArrayOption={parentIsNotArrayType}
         />
         <OptionsSection
           fieldId={id}

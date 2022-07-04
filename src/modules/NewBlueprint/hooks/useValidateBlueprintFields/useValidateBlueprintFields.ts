@@ -10,60 +10,93 @@ type FieldArray = BlueprintField['id'][];
 type AllFields = {
   [key: BlueprintField['id']]: BlueprintField;
 };
-type BlueprintFieldError = BlueprintField | false;
 
-type ValidateFields = (fields: FieldArray, allFields: AllFields) => BlueprintFieldError;
+interface BlueprintFieldsReduce {
+  validationError: BlueprintField | false;
+  nameValues: string[];
+}
+
+type ValidateFields = (
+  fields: FieldArray,
+  allFields: AllFields,
+) => BlueprintField | false;
 const validateFields: ValidateFields = (fields, allFields) => {
-  const fieldError = fields.reduce<BlueprintFieldError>((prev, fieldId) => {
-    // Bailing out of checks if we found an error.
-    if (prev) {
+  const { validationError } = fields.reduce<BlueprintFieldsReduce>(
+    (prev, fieldId) => {
+      // Bailing out of checks if we found an error.
+      if (prev.validationError) {
+        return prev;
+      }
+
+      // Little bit lighter validation compared to the API. Prolly not smart, but this is a personal project.
+      const field = allFields[fieldId];
+
+      // Validate the field name
+      const nameError = validateName(field.name);
+      if (nameError) {
+        prev.validationError = {
+          ...field,
+          errorType: BlueprintFieldErrorTypes.NAME,
+          errorMessage: nameError,
+        };
+        return prev;
+      }
+
+      // Validate that the name is not a duplicate on this branch-level of the tree.
+      if (prev.nameValues.indexOf(field.name) !== -1) {
+        prev.validationError = {
+          ...field,
+          errorType: BlueprintFieldErrorTypes.NAME,
+          errorMessage: 'name is already taken on this level',
+        };
+        return prev;
+      } else {
+        prev.nameValues = prev.nameValues.concat(field.name);
+      }
+
+      // Validate field arrayOf if its an array.
+      if (field.type === BlueprintFieldTypes.ARRAY) {
+        if (!field.arrayOf) {
+          prev.validationError = {
+            ...field,
+            errorType: BlueprintFieldErrorTypes.CHILDREN,
+            errorMessage: 'arrays must contain a child field',
+          };
+          return prev;
+        }
+
+        // Recursive dive into the arrayOf.
+        const arrayOfError = validateFields([field.arrayOf], allFields);
+        if (arrayOfError) {
+          prev.validationError = arrayOfError;
+          return prev;
+        }
+      }
+      // Validate field children if its an object.
+      else if (field.type === BlueprintFieldTypes.OBJECT) {
+        if (!field.children || !field.children.length) {
+          prev.validationError = {
+            ...field,
+            errorType: BlueprintFieldErrorTypes.CHILDREN,
+            errorMessage: 'objects must contain children fields',
+          };
+          return prev;
+        }
+
+        // Recursive dive into the children.
+        const childrenError = validateFields(field.children, allFields);
+        if (childrenError) {
+          prev.validationError = childrenError;
+          return prev;
+        }
+      }
+
       return prev;
-    }
+    },
+    { validationError: false, nameValues: [] },
+  );
 
-    // Little bit lighter validation compared to the API. Prolly not smart, but this is a personal project.
-    const field = allFields[fieldId];
-
-    // Validate the field name
-    const nameError = validateName(field.name);
-    if (nameError) {
-      return {
-        ...field,
-        errorType: BlueprintFieldErrorTypes.NAME,
-        errorMessage: nameError,
-      };
-    }
-
-    // Validate field arrayOf if its an array.
-    if (field.type === BlueprintFieldTypes.ARRAY) {
-      if (!field.arrayOf) {
-        return {
-          ...field,
-          errorType: BlueprintFieldErrorTypes.CHILDREN,
-          errorMessage: 'arrays must contain children fields',
-        };
-      }
-
-      // Recursive dive into the arrayOf.
-      return validateFields([field.arrayOf], allFields);
-    }
-    // Validate field children if its an object.
-    else if (field.type === BlueprintFieldTypes.OBJECT) {
-      if (!field.children || !field.children.length) {
-        return {
-          ...field,
-          errorType: BlueprintFieldErrorTypes.CHILDREN,
-          errorMessage: 'objects must contain children fields',
-        };
-      }
-
-      // Recursive dive into the children.
-      return validateFields(field.children, allFields);
-    }
-
-    return prev;
-  }, false);
-
-  return fieldError;
+  return validationError;
 };
 
 const useValidateBlueprintFields = () => {

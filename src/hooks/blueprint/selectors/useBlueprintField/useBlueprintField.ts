@@ -6,6 +6,9 @@ function useBlueprintField(fieldId: string) {
   const parentId = useSelector(
     ({ blueprint }: RootState) => blueprint.fields[fieldId].parentId,
   );
+  const parentType = useSelector(
+    ({ blueprint }: RootState) => blueprint.fields[parentId || 'root']?.type,
+  );
   const name = useSelector(({ blueprint }: RootState) => blueprint.fields[fieldId].name);
   const type = useSelector(({ blueprint }: RootState) => blueprint.fields[fieldId].type);
   const isRequired = useSelector(
@@ -40,6 +43,7 @@ function useBlueprintField(fieldId: string) {
   return {
     id: fieldId,
     parentId,
+    parentType,
     name,
     type,
     isRequired,
