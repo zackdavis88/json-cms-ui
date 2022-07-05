@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { RootState } from 'src/store/store';
 
 function useBreadcrumbData(fieldId: string) {
@@ -16,7 +16,7 @@ function useBreadcrumbData(fieldId: string) {
       name: blueprint.fields[fieldId].name,
       hasError: !!blueprint.fields[fieldId].errorType,
     };
-  });
+  }, shallowEqual);
 
   return breadcrumbData;
 }
