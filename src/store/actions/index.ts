@@ -36,6 +36,7 @@ export {
   BLUEPRINT_ADD_FIELD,
   BLUEPRINT_UPDATE_FIELD,
   BLUEPRINT_UPDATE_FIELD_ERROR,
+  BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
   BLUEPRINT_RESET_STATE,
@@ -48,6 +49,7 @@ export {
   updateBlueprintFieldView,
   updateBlueprintNameError,
   updateBlueprintFieldError,
+  updateBlueprintRootFieldsError,
   resetBlueprintState,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';

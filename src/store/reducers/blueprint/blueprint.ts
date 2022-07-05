@@ -4,6 +4,7 @@ import {
   BLUEPRINT_ADD_FIELD,
   BLUEPRINT_UPDATE_FIELD,
   BLUEPRINT_UPDATE_FIELD_ERROR,
+  BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR,
   BLUEPRINT_REMOVE_FIELD,
   BLUEPRINT_UPDATE_FIELD_VIEW,
   BLUEPRINT_RESET_STATE,
@@ -22,6 +23,7 @@ export interface BlueprintState {
   fields: {
     [key: string]: BlueprintField;
   };
+  rootFieldsError: string;
 }
 
 interface BlueprintAction extends ReduxAction {
@@ -29,6 +31,7 @@ interface BlueprintAction extends ReduxAction {
   fieldView: BlueprintFieldView;
   name: string;
   nameError: string;
+  rootFieldsError: string;
   // TODO: request will probably also go here once we get to that.
 }
 
@@ -37,7 +40,9 @@ export const defaultState: BlueprintState = {
   fieldView: 'root',
   fields: {},
   rootFields: [],
+
   nameError: '',
+  rootFieldsError: '',
 };
 
 type BlueprintReducer = (
@@ -222,6 +227,12 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       }
 
       return newState;
+    }
+    case BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR: {
+      return {
+        ...state,
+        rootFieldsError: action.rootFieldsError,
+      };
     }
     case BLUEPRINT_RESET_STATE: {
       return { ...defaultState };

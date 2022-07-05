@@ -12,6 +12,7 @@ import {
 import {
   useDispatchUpdateBlueprintNameError,
   useDispatchUpdateBlueprintFieldError,
+  useDispatchUpdateBlueprintRootFieldsError,
 } from 'src/hooks';
 import { BlueprintField } from 'src/store/actions';
 
@@ -20,12 +21,23 @@ const NewBlueprintActions = () => {
   const [backdropIsOpen, setBackdropIsOpen] = React.useState(false);
   const updateBlueprintNameError = useDispatchUpdateBlueprintNameError();
   const updateBlueprintFieldError = useDispatchUpdateBlueprintFieldError();
+  const updateBlueprintRootFieldsError = useDispatchUpdateBlueprintRootFieldsError();
 
-  const handleValidationError = (errorMessage: string | BlueprintField) => {
-    if (typeof errorMessage === 'string') {
-      updateBlueprintNameError(errorMessage);
-    } else {
-      updateBlueprintFieldError(errorMessage);
+  const handleValidationError = ({
+    nameError,
+    fieldError,
+    rootFieldsError,
+  }: {
+    nameError?: string;
+    fieldError?: BlueprintField;
+    rootFieldsError?: string;
+  }) => {
+    if (nameError) {
+      updateBlueprintNameError(nameError);
+    } else if (fieldError) {
+      updateBlueprintFieldError(fieldError);
+    } else if (rootFieldsError) {
+      updateBlueprintRootFieldsError(rootFieldsError);
     }
 
     setBackdropIsOpen(false);

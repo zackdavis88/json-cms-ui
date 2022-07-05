@@ -6,3 +6,4 @@ export { default as useDispatchUpdateBlueprintFieldView } from './useDispatchUpd
 export { default as useDispatchUpdateBlueprintNameError } from './useDispatchUpdateBlueprintNameError';
 export { default as useDispatchUpdateBlueprintFieldError } from './useDispatchUpdateBlueprintFieldError';
 export { default as useDispatchResetBlueprintState } from './useDispatchResetBlueprintState';
+export { default as useDispatchUpdateBlueprintRootFieldsError } from './useDispatchUpdateBlueprintRootFieldsError';

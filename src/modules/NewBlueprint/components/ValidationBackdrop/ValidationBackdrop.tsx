@@ -7,8 +7,14 @@ import {
 } from 'src/modules/NewBlueprint/hooks';
 import { BlueprintField } from 'src/store/actions';
 
+interface OnValidationErrorInput {
+  nameError?: string;
+  fieldError?: BlueprintField;
+  rootFieldsError?: string;
+}
+
 interface ValidationBackdropProps {
-  onValidationError: (errorMessage: string | BlueprintField) => void;
+  onValidationError: (input: OnValidationErrorInput) => void;
 }
 
 const ValidationBackdrop = ({ onValidationError }: ValidationBackdropProps) => {
@@ -26,10 +32,14 @@ const ValidationBackdrop = ({ onValidationError }: ValidationBackdropProps) => {
   const resultsSubmitted = React.useRef<boolean>(false);
   React.useEffect(() => {
     if (nameError && !resultsSubmitted.current) {
-      onValidationError(nameError);
+      onValidationError({ nameError });
       resultsSubmitted.current = true;
     } else if (fieldError && !resultsSubmitted.current) {
-      onValidationError(fieldError);
+      if (typeof fieldError === 'string') {
+        onValidationError({ rootFieldsError: fieldError });
+      } else {
+        onValidationError({ fieldError });
+      }
       resultsSubmitted.current = true;
     }
   }, [nameError, fieldError, onValidationError]);

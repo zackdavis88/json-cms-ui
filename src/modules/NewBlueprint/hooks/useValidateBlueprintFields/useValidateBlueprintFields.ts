@@ -103,6 +103,10 @@ const useValidateBlueprintFields = () => {
   const fields = useBlueprintAllFields();
   const rootFields = useBlueprintRootFields();
 
+  if (!rootFields.length) {
+    return 'At least one field is required, use the Add Field button.' as string;
+  }
+
   const errorMessage = validateFields(rootFields, fields);
   if (errorMessage) {
     return errorMessage;

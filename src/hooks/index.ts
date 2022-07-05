@@ -29,4 +29,5 @@ export {
   useDispatchUpdateBlueprintNameError,
   useDispatchUpdateBlueprintFieldError,
   useDispatchResetBlueprintState,
+  useDispatchUpdateBlueprintRootFieldsError,
 } from './blueprint';
