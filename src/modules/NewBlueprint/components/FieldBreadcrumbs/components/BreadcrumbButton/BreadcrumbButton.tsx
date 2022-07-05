@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatchUpdateBlueprintFieldView } from 'src/hooks';
 import { Box, Button, Divider } from '@mui/material';
 import { useTheme, styled } from '@mui/material/styles';
-import { useBreadcrumbName } from 'src/modules/NewBlueprint/hooks';
+import { useBreadcrumbData } from 'src/modules/NewBlueprint/hooks';
 
 interface BreadcrumbButtonProps {
   fieldId: string;
@@ -11,7 +11,7 @@ interface BreadcrumbButtonProps {
 
 const BreadcrumbButton = ({ fieldId, disabled = false }: BreadcrumbButtonProps) => {
   const theme = useTheme();
-  const name = useBreadcrumbName(fieldId);
+  const { name, hasError } = useBreadcrumbData(fieldId);
   const updateBlueprintFieldView = useDispatchUpdateBlueprintFieldView();
 
   return (
@@ -22,6 +22,7 @@ const BreadcrumbButton = ({ fieldId, disabled = false }: BreadcrumbButtonProps) 
         onClick={() => updateBlueprintFieldView(fieldId)}
         disabled={disabled}
         disableTouchRipple
+        className={hasError ? 'hasError' : undefined}
       >
         <span>{name}</span>
       </StyledButton>
@@ -34,6 +35,9 @@ const BreadcrumbButton = ({ fieldId, disabled = false }: BreadcrumbButtonProps) 
 
 const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.main,
+  '&.hasError': {
+    color: theme.palette.error.main,
+  },
   textTransform: 'none',
   '&:disabled': {
     color: theme.palette.common.black,

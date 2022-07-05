@@ -80,6 +80,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         };
 
         newState.rootFields = [...newState.rootFields, action.field.id];
+        newState.rootFieldsError = ''; // This is an error that gets set when rootFields failed validation because it was an empty array.
       } else {
         const parentField = { ...newState.fields[state.fieldView] };
         if (parentField.type === BlueprintFieldTypes.ARRAY) {
