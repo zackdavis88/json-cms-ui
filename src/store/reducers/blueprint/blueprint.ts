@@ -1,4 +1,7 @@
 import {
+  BLUEPRINT_REQUEST,
+  BLUEPRINT_SUCCESS,
+  BLUEPRINT_FAILURE,
   BLUEPRINT_NAME_UPDATE,
   BLUEPRINT_NAME_ERROR_UPDATE,
   BLUEPRINT_ADD_FIELD,
@@ -24,6 +27,7 @@ export interface BlueprintState {
     [key: string]: BlueprintField;
   };
   rootFieldsError: string;
+  isLoading: boolean;
 }
 
 interface BlueprintAction extends ReduxAction {
@@ -43,6 +47,8 @@ export const defaultState: BlueprintState = {
 
   nameError: '',
   rootFieldsError: '',
+
+  isLoading: false,
 };
 
 type BlueprintReducer = (
@@ -51,6 +57,24 @@ type BlueprintReducer = (
 ) => BlueprintState;
 const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case BLUEPRINT_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case BLUEPRINT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case BLUEPRINT_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
     case BLUEPRINT_NAME_UPDATE: {
       return {
         ...state,

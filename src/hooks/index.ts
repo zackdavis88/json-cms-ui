@@ -30,4 +30,5 @@ export {
   useDispatchUpdateBlueprintFieldError,
   useDispatchResetBlueprintState,
   useDispatchUpdateBlueprintRootFieldsError,
+  useDispatchCreateBlueprint,
 } from './blueprint';

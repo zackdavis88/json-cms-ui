@@ -17,9 +17,13 @@ export {
 import {
   BlueprintFieldView as _BlueprintFieldView,
   BlueprintField as _BlueprintField,
+  BlueprintPayload as _BlueprintPayload,
+  BlueprintPayloadField as _BlueprintPayloadField,
 } from './types';
 export type BlueprintFieldView = _BlueprintFieldView;
 export type BlueprintField = _BlueprintField;
+export type BlueprintPayload = _BlueprintPayload;
+export type BlueprintPayloadField = _BlueprintPayloadField;
 export { updateBlueprintName } from './updateName';
 export { updateBlueprintField } from './updateField';
 export { removeBlueprintField } from './removeField';
@@ -29,3 +33,4 @@ export { updateBlueprintNameError } from './updateNameError';
 export { updateBlueprintFieldError } from './updateFieldError';
 export { updateBlueprintRootFieldsError } from './updateRootFieldsError';
 export { resetBlueprintState } from './resetState';
+export { createBlueprint } from './createBlueprint';

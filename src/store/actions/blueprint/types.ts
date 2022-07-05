@@ -6,15 +6,12 @@ export const BLUEPRINT_FAILURE = 'BLUEPRINT_FAILURE';
 // State Mutations
 export const BLUEPRINT_NAME_UPDATE = 'BLUEPRINT_NAME_UPDATE';
 export const BLUEPRINT_NAME_ERROR_UPDATE = 'BLUEPRINT_NAME_ERROR_UPDATE';
-
 export const BLUEPRINT_ADD_FIELD = 'BLUEPRINT_ADD_FIELD';
 export const BLUEPRINT_UPDATE_FIELD = 'BLUEPRINT_UPDATE_FIELD';
 export const BLUEPRINT_UPDATE_FIELD_ERROR = 'BLUEPRINT_UPDATE_FIELD_ERROR';
 export const BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR = 'BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR';
 export const BLUEPRINT_REMOVE_FIELD = 'BLUEPRINT_REMOVE_FIELD';
-
 export const BLUEPRINT_UPDATE_FIELD_VIEW = 'BLUEPRINT_UPDATE_FIELD_VIEW';
-
 export const BLUEPRINT_RESET_STATE = 'BLUEPRINT_RESET_STATE';
 
 // Typescript types.
@@ -50,3 +47,21 @@ export interface BlueprintField {
 }
 
 export type BlueprintFieldView = 'root' | BlueprintField['id'];
+
+export interface BlueprintPayloadField {
+  id: string;
+  name: string;
+  type: BlueprintFieldTypes;
+  isRequired?: boolean;
+  isInteger?: boolean;
+  regex?: string;
+  min?: number;
+  max?: number;
+  arrayOf?: BlueprintPayloadField;
+  fields?: BlueprintPayloadField[];
+}
+
+export interface BlueprintPayload {
+  name: string;
+  fields: BlueprintPayloadField[];
+}

@@ -2,10 +2,14 @@ import { NotificationTypes as _NotificationTypes } from './notification';
 import {
   BlueprintFieldView as _BlueprintFieldView,
   BlueprintField as _BlueprintField,
+  BlueprintPayload as _BlueprintPayload,
+  BlueprintPayloadField as _BlueprintPayloadField,
 } from './blueprint';
 export type NotificationTypes = _NotificationTypes;
 export type BlueprintFieldView = _BlueprintFieldView;
 export type BlueprintField = _BlueprintField;
+export type BlueprintPayload = _BlueprintPayload;
+export type BlueprintPayloadField = _BlueprintPayloadField;
 export {
   AUTH_SUCCESS,
   AUTH_FAILURE,
@@ -51,5 +55,6 @@ export {
   updateBlueprintFieldError,
   updateBlueprintRootFieldsError,
   resetBlueprintState,
+  createBlueprint,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';
