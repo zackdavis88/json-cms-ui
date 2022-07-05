@@ -100,14 +100,14 @@ const validateFields: ValidateFields = (fields, allFields) => {
 };
 
 const useValidateBlueprintFields = () => {
-  const fields = useBlueprintAllFields();
+  const allFields = useBlueprintAllFields();
   const rootFields = useBlueprintRootFields();
 
   if (!rootFields.length) {
     return 'At least one field is required, use the Add Field button.' as string;
   }
 
-  const errorMessage = validateFields(rootFields, fields);
+  const errorMessage = validateFields(rootFields, allFields);
   if (errorMessage) {
     return errorMessage;
   }

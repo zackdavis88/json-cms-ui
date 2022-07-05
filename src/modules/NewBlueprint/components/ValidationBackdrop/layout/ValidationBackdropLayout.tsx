@@ -10,7 +10,7 @@ const ValidationBackdropLayout = () => {
       <Box marginBottom={theme.spacing(3)}>
         <CircularProgress color="inherit" />
       </Box>
-      <Typography variant="h5">Validating Blueprint Data</Typography>
+      <Typography variant="h5">Validating and Saving Blueprint</Typography>
     </>
   );
 };

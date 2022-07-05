@@ -14,35 +14,40 @@ interface OnValidationErrorInput {
 }
 
 interface ValidationBackdropProps {
-  onValidationError: (input: OnValidationErrorInput) => void;
+  onAfterValidation: (input: OnValidationErrorInput) => void;
 }
 
-const ValidationBackdrop = ({ onValidationError }: ValidationBackdropProps) => {
+const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
   const nameError = useValidateBlueprintName();
   const fieldError = useValidateBlueprintFields();
   /*
-    calling onValidationError will lead to state updates for a field object...but if the state updates
-    then the useValidatieBlueprintFields will rerun because allFields is updating...
+    calling onAfterValidation will lead to state updates for a field object...but if the state updates
+    then the useValidateBlueprintFields hook will rerun because allFields is updating...
 
     So we need to ensure that once we report back the validation error that we no longer call for a state update again.
 
     This resultsSubmitted ref should track that and once validation truly finishes this component unmounts, meaning the ref 
     will reset on each save.
   */
-  const resultsSubmitted = React.useRef<boolean>(false);
+  const validationErrorSubmitted = React.useRef<boolean>(false);
+
   React.useEffect(() => {
-    if (nameError && !resultsSubmitted.current) {
-      onValidationError({ nameError });
-      resultsSubmitted.current = true;
-    } else if (fieldError && !resultsSubmitted.current) {
+    if (nameError && !validationErrorSubmitted.current) {
+      onAfterValidation({ nameError });
+      validationErrorSubmitted.current = true;
+    } else if (fieldError && !validationErrorSubmitted.current) {
       if (typeof fieldError === 'string') {
-        onValidationError({ rootFieldsError: fieldError });
+        onAfterValidation({ rootFieldsError: fieldError });
       } else {
-        onValidationError({ fieldError });
+        onAfterValidation({ fieldError });
       }
-      resultsSubmitted.current = true;
+      validationErrorSubmitted.current = true;
     }
-  }, [nameError, fieldError, onValidationError]);
+
+    if (!nameError && !fieldError && !validationErrorSubmitted.current) {
+      onAfterValidation({});
+    }
+  }, [nameError, fieldError, onAfterValidation]);
 
   return (
     <StyledBackdrop open>

@@ -13,6 +13,7 @@ import {
   useDispatchUpdateBlueprintNameError,
   useDispatchUpdateBlueprintFieldError,
   useDispatchUpdateBlueprintRootFieldsError,
+  useDispatchCreateBlueprint,
 } from 'src/hooks';
 import { BlueprintField } from 'src/store/actions';
 
@@ -22,8 +23,9 @@ const NewBlueprintActions = () => {
   const updateBlueprintNameError = useDispatchUpdateBlueprintNameError();
   const updateBlueprintFieldError = useDispatchUpdateBlueprintFieldError();
   const updateBlueprintRootFieldsError = useDispatchUpdateBlueprintRootFieldsError();
+  const createBlueprint = useDispatchCreateBlueprint();
 
-  const handleValidationError = ({
+  const handleAfterValidation = async ({
     nameError,
     fieldError,
     rootFieldsError,
@@ -38,8 +40,10 @@ const NewBlueprintActions = () => {
       updateBlueprintFieldError(fieldError);
     } else if (rootFieldsError) {
       updateBlueprintRootFieldsError(rootFieldsError);
+    } else {
+      const response = await createBlueprint();
+      console.log(response);
     }
-
     setBackdropIsOpen(false);
   };
 
@@ -63,7 +67,7 @@ const NewBlueprintActions = () => {
           </Button>
         </Link>
       </ActionsContainer>
-      {backdropIsOpen && <ValidationBackdrop onValidationError={handleValidationError} />}
+      {backdropIsOpen && <ValidationBackdrop onAfterValidation={handleAfterValidation} />}
     </>
   );
 };
