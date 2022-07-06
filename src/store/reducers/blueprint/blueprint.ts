@@ -15,8 +15,10 @@ import {
   BlueprintFieldView,
   BlueprintFieldTypes,
   BlueprintFieldErrorTypes,
+  BlueprintPayload,
 } from 'src/store/actions';
 import { Action as ReduxAction } from '@reduxjs/toolkit';
+import { reduceAPIBlueprint } from './utils';
 
 export interface BlueprintState {
   name: string;
@@ -36,7 +38,13 @@ interface BlueprintAction extends ReduxAction {
   name: string;
   nameError: string;
   rootFieldsError: string;
-  // TODO: request will probably also go here once we get to that.
+  response: {
+    body: {
+      message: string;
+      error: string;
+      blueprint: BlueprintPayload;
+    };
+  };
 }
 
 export const defaultState: BlueprintState = {
@@ -64,10 +72,16 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       };
     }
     case BLUEPRINT_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-      };
+      const newState = { ...state };
+
+      const blueprint = action.response.body.blueprint;
+      const { rootFields, fields } = reduceAPIBlueprint(blueprint.fields);
+
+      newState.name = blueprint.name;
+      newState.rootFields = rootFields;
+      newState.fields = fields;
+      newState.isLoading = false;
+      return newState;
     }
     case BLUEPRINT_FAILURE: {
       return {

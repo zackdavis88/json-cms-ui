@@ -1,1 +1,1 @@
-export { getAuthToken } from './ssr';
+export { getAuthToken, getBlueprintById } from './ssr';
