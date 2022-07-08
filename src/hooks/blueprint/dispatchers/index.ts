@@ -8,3 +8,4 @@ export { default as useDispatchUpdateBlueprintFieldError } from './useDispatchUp
 export { default as useDispatchResetBlueprintState } from './useDispatchResetBlueprintState';
 export { default as useDispatchUpdateBlueprintRootFieldsError } from './useDispatchUpdateBlueprintRootFieldsError';
 export { default as useDispatchCreateBlueprint } from './useDispatchCreateBlueprint';
+export { default as useDispatchUpdateBlueprint } from './useDispatchUpdateBlueprint';

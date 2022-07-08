@@ -17,4 +17,5 @@ export {
   useDispatchResetBlueprintState,
   useDispatchUpdateBlueprintRootFieldsError,
   useDispatchCreateBlueprint,
+  useDispatchUpdateBlueprint,
 } from './dispatchers';

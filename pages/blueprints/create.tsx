@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { getAuthToken } from 'src/utils';
 import Head from 'next/head';
-import { NewBlueprint } from 'src/modules';
+import { BlueprintEditor } from 'src/modules';
 
 function BlueprintCreatePage() {
   return (
@@ -10,7 +10,7 @@ function BlueprintCreatePage() {
       <Head>
         <title>JSON CMS - Create Blueprint</title>
       </Head>
-      <NewBlueprint />
+      <BlueprintEditor />
     </>
   );
 }

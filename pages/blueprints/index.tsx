@@ -11,9 +11,16 @@ function BlueprintsPage() {
         <title>JSON CMS - Blueprints</title>
       </Head>
       <div>Blueprints Page</div>
-      <Link href="/blueprints/create">
-        <a>Create</a>
-      </Link>
+      <div>
+        <Link href="/blueprints/create">
+          <a>Create</a>
+        </Link>
+      </div>
+      <div>
+        <Link href="/blueprints/62c4cb1e922b758de30b6361">
+          <a>Existing Blueprint</a>
+        </Link>
+      </div>
     </>
   );
 }

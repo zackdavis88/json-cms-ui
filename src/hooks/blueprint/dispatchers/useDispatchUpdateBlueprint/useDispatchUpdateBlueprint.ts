@@ -1,14 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createBlueprint as createBlueprintAction } from 'src/store/actions';
+import { updateBlueprint as updateBlueprintAction } from 'src/store/actions';
 import {
   useBlueprintAllFields,
   useBlueprintRootFields,
   useBlueprintName,
 } from 'src/hooks';
+import { useRouter } from 'next/router';
 import { buildBlueprintPayload } from 'src/utils';
 
-interface CreateBlueprintResponse {
+interface UpdateBlueprintResponse {
   body: {
     message?: string;
     error?: string;
@@ -16,21 +17,22 @@ interface CreateBlueprintResponse {
   status: number;
 }
 
-const useDispatchCreateBlueprint = () => {
+const useDispatchUpdateBlueprint = () => {
+  const blueprintId = useRouter().query.id || '';
   const dispatch = useDispatch();
   const rootFields = useBlueprintRootFields();
   const allFields = useBlueprintAllFields();
   const { name } = useBlueprintName();
 
-  const createBlueprint = React.useCallback(async () => {
+  const updateBlueprint = React.useCallback(async () => {
     const payload = buildBlueprintPayload(name, rootFields, allFields);
     const response = (await dispatch(
-      createBlueprintAction(payload),
-    )) as unknown as CreateBlueprintResponse;
+      updateBlueprintAction(blueprintId, payload),
+    )) as unknown as UpdateBlueprintResponse;
     return response;
-  }, [rootFields, allFields, name, dispatch]);
+  }, [rootFields, allFields, name, dispatch, blueprintId]);
 
-  return createBlueprint;
+  return updateBlueprint;
 };
 
-export default useDispatchCreateBlueprint;
+export default useDispatchUpdateBlueprint;

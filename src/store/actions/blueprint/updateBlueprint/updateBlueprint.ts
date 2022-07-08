@@ -6,14 +6,10 @@ import {
   BlueprintPayload,
 } from 'src/store/actions/index';
 
-/*
-  When creating a blueprint we dont need to update the state with the API payload. We also dont really
-  care about the isLoading flag either in the create flow (I think.)
-
-  For now we are going to execute NOOP operations for create. We really are just using the API middleware
-  to make a fetch request, but dont want to update the blueprint state at all with this dispatcher.
-*/
-const createBlueprint = (payload: BlueprintPayload) => {
+const updateBlueprint = (
+  blueprintId: string | string[] | undefined,
+  payload: BlueprintPayload,
+) => {
   const BLUEPRINT_REQUEST_NOOP = `${BLUEPRINT_REQUEST}_NOOP`;
   const BLUEPRINT_SUCCESS_NOOP = `${BLUEPRINT_SUCCESS}_NOOP`;
   const BLUEPRINT_FAILURE_NOOP = `${BLUEPRINT_FAILURE}_NOOP`;
@@ -24,7 +20,7 @@ const createBlueprint = (payload: BlueprintPayload) => {
       BLUEPRINT_SUCCESS_NOOP,
       BLUEPRINT_FAILURE_NOOP,
     ],
-    url: '/api/blueprints',
+    url: `/api/blueprints/${blueprintId}`,
     options: {
       method: 'POST',
     },
@@ -32,4 +28,4 @@ const createBlueprint = (payload: BlueprintPayload) => {
   };
 };
 
-export default createBlueprint;
+export default updateBlueprint;

@@ -56,5 +56,7 @@ export {
   updateBlueprintRootFieldsError,
   resetBlueprintState,
   createBlueprint,
+  getBlueprint,
+  updateBlueprint,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';

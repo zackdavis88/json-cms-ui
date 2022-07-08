@@ -34,3 +34,5 @@ export { updateBlueprintFieldError } from './updateFieldError';
 export { updateBlueprintRootFieldsError } from './updateRootFieldsError';
 export { resetBlueprintState } from './resetState';
 export { createBlueprint } from './createBlueprint';
+export { getBlueprint } from './getBlueprint';
+export { updateBlueprint } from './updateBlueprint';
