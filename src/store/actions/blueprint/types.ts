@@ -62,6 +62,18 @@ export interface BlueprintPayloadField {
 }
 
 export interface BlueprintPayload {
+  id: string;
   name: string;
   fields: BlueprintPayloadField[];
+  createdOn?: string;
+  createdBy?: {
+    username: string;
+    displayName: string;
+  };
+  updatedOn?: string;
+  updatedBy?: {
+    username: string;
+    displayName: string;
+  };
+  version: number;
 }

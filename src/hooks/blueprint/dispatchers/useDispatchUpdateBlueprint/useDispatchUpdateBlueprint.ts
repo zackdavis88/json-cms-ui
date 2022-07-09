@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateBlueprint as updateBlueprintAction } from 'src/store/actions';
+import {
+  updateBlueprint as updateBlueprintAction,
+  BlueprintPayload,
+} from 'src/store/actions';
 import {
   useBlueprintAllFields,
   useBlueprintRootFields,
@@ -13,6 +16,7 @@ interface UpdateBlueprintResponse {
   body: {
     message?: string;
     error?: string;
+    blueprint?: BlueprintPayload;
   };
   status: number;
 }

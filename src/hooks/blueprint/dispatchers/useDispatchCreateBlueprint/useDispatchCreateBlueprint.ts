@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createBlueprint as createBlueprintAction } from 'src/store/actions';
+import {
+  createBlueprint as createBlueprintAction,
+  BlueprintPayload,
+} from 'src/store/actions';
 import {
   useBlueprintAllFields,
   useBlueprintRootFields,
@@ -12,6 +15,7 @@ interface CreateBlueprintResponse {
   body: {
     message?: string;
     error?: string;
+    blueprint?: BlueprintPayload;
   };
   status: number;
 }

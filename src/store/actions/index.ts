@@ -58,5 +58,6 @@ export {
   createBlueprint,
   getBlueprint,
   updateBlueprint,
+  getBlueprintList,
 } from './blueprint';
 export const API_REQUEST = 'API_REQUEST';

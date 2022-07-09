@@ -9,3 +9,4 @@ export { default as useDispatchResetBlueprintState } from './useDispatchResetBlu
 export { default as useDispatchUpdateBlueprintRootFieldsError } from './useDispatchUpdateBlueprintRootFieldsError';
 export { default as useDispatchCreateBlueprint } from './useDispatchCreateBlueprint';
 export { default as useDispatchUpdateBlueprint } from './useDispatchUpdateBlueprint';
+export { default as useDispatchGetBlueprintList } from './useDispatchGetBlueprintList';
