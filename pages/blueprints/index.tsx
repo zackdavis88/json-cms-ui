@@ -1,8 +1,8 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { getAuthToken } from 'src/utils';
-import Link from 'next/link';
 import Head from 'next/head';
+import { BlueprintList } from 'src/modules';
 
 function BlueprintsPage() {
   return (
@@ -10,17 +10,7 @@ function BlueprintsPage() {
       <Head>
         <title>JSON CMS - Blueprints</title>
       </Head>
-      <div>Blueprints Page</div>
-      <div>
-        <Link href="/blueprints/create">
-          <a>Create</a>
-        </Link>
-      </div>
-      <div>
-        <Link href="/blueprints/62c4cb1e922b758de30b6361">
-          <a>Existing Blueprint</a>
-        </Link>
-      </div>
+      <BlueprintList />
     </>
   );
 }

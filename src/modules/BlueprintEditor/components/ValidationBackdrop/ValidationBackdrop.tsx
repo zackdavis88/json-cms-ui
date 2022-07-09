@@ -11,15 +11,19 @@ import {
   useDispatchUpdateBlueprintNameError,
   useDispatchUpdateBlueprintRootFieldsError,
   useDispatchUpdateBlueprintFieldError,
+  useDispatchShowNotification,
 } from 'src/hooks';
 import { useRouter } from 'next/router';
+import { ROUTES } from 'src/constants';
 
 interface ValidationBackdropProps {
   onAfterValidation: () => void;
 }
 
 const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
-  const isUpdatePage = !!useRouter().query.id;
+  const router = useRouter();
+  const isUpdatePage = !!router.query.id;
+  const showNotification = useDispatchShowNotification();
   const nameError = useValidateBlueprintName();
   const fieldError = useValidateBlueprintFields();
   const createBlueprint = useDispatchCreateBlueprint();
@@ -54,8 +58,27 @@ const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
     if (!nameError && !fieldError && !validationErrorSubmitted.current) {
       const saveBlueprint = async () => {
         const save = isUpdatePage ? updateBlueprint : createBlueprint;
-        const response = await save();
-        console.log(response);
+        const { body } = await save();
+
+        if (body.error) {
+          showNotification(body.error, 'error');
+        } else if (body.blueprint) {
+          if (isUpdatePage) {
+            showNotification(body.message || 'successfully updated blueprint', 'success');
+          } else {
+            // TODO: This is where you left off, running list of things before this is ready to merge:
+            /*
+              1. Field accordions controlled via prop, defaulting to closed but ones that are new or have errors will be opened.
+              2. Disable the save button by default, only enable it once the BlueprintEditor has a change.
+            */
+            router.push(ROUTES.BLUEPRINTS).then(() => {
+              showNotification(
+                body.message || 'successfully created blueprint',
+                'success',
+              );
+            });
+          }
+        }
       };
       saveBlueprint();
     }
@@ -71,6 +94,8 @@ const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
     updateBlueprintFieldError,
     updateBlueprintNameError,
     updateBlueprintRootFieldsError,
+    router,
+    showNotification,
   ]);
 
   return (
