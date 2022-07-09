@@ -3,9 +3,10 @@ import {
   BLUEPRINT_SUCCESS,
   BLUEPRINT_FAILURE,
   API_REQUEST,
-  BlueprintPayload,
+  BlueprintPayload as _BlueprintPayload,
 } from 'src/store/actions/index';
 
+type BlueprintPayload = Omit<_BlueprintPayload, 'id' | 'version'>;
 const updateBlueprint = (
   blueprintId: string | string[] | undefined,
   payload: BlueprintPayload,

@@ -3,7 +3,7 @@ import {
   BLUEPRINT_SUCCESS,
   BLUEPRINT_FAILURE,
   API_REQUEST,
-  BlueprintPayload,
+  BlueprintPayload as _BlueprintPayload,
 } from 'src/store/actions/index';
 
 /*
@@ -13,6 +13,7 @@ import {
   For now we are going to execute NOOP operations for create. We really are just using the API middleware
   to make a fetch request, but dont want to update the blueprint state at all with this dispatcher.
 */
+type BlueprintPayload = Omit<_BlueprintPayload, 'id' | 'version'>;
 const createBlueprint = (payload: BlueprintPayload) => {
   const BLUEPRINT_REQUEST_NOOP = `${BLUEPRINT_REQUEST}_NOOP`;
   const BLUEPRINT_SUCCESS_NOOP = `${BLUEPRINT_SUCCESS}_NOOP`;

@@ -1,6 +1,6 @@
 import {
   BlueprintField,
-  BlueprintPayload,
+  BlueprintPayload as _BlueprintPayload,
   BlueprintPayloadField,
   BlueprintFieldTypes,
 } from 'src/store/actions';
@@ -8,6 +8,8 @@ import {
 interface AllFields {
   [key: BlueprintField['id']]: BlueprintField;
 }
+
+type BlueprintPayload = Omit<_BlueprintPayload, 'id' | 'version'>;
 
 const reduceFields = (fieldsArray: BlueprintField['id'][], allFields: AllFields) => {
   return fieldsArray.reduce<BlueprintPayload['fields']>((prev, fieldId) => {
