@@ -66,10 +66,6 @@ const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
           if (isUpdatePage) {
             showNotification(body.message || 'successfully updated blueprint', 'success');
           } else {
-            // TODO: This is where you left off, running list of things before this is ready to merge:
-            /*
-              1. Disable the save button by default, only enable it once the BlueprintEditor has a change.
-            */
             router.push(ROUTES.BLUEPRINTS).then(() => {
               showNotification(
                 body.message || 'successfully created blueprint',

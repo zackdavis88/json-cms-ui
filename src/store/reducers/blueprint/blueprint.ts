@@ -30,6 +30,9 @@ export interface BlueprintState {
   };
   rootFieldsError: string;
   isLoading: boolean;
+
+  // We want to track whenever the blueprint editor has a change made so that we can control the save buttons disabled state.
+  hasChange: boolean;
 }
 
 interface BlueprintAction extends ReduxAction {
@@ -57,6 +60,7 @@ export const defaultState: BlueprintState = {
   rootFieldsError: '',
 
   isLoading: false,
+  hasChange: false,
 };
 
 type BlueprintReducer = (
@@ -94,6 +98,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         ...state,
         name: action.name,
         nameError: '',
+        hasChange: true,
       };
     }
     case BLUEPRINT_NAME_ERROR_UPDATE: {
@@ -155,6 +160,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         };
       }
 
+      newState.hasChange = true;
       return newState;
     }
     case BLUEPRINT_UPDATE_FIELD: {
@@ -180,6 +186,13 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
           newState.fields[parentId] = parentField;
           parentId = parentField.parentId;
         }
+      }
+
+      // If a field had data change we want to update the hasChange flag EXCEPT for if isExpanded was changed.
+      const isExpandedWasUpdated =
+        state.fields[action.field.id].isExpanded !== action.field.isExpanded;
+      if (!isExpandedWasUpdated) {
+        newState.hasChange = true;
       }
 
       return newState;
@@ -265,6 +278,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         }
       }
 
+      newState.hasChange = true;
       return newState;
     }
     case BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR: {

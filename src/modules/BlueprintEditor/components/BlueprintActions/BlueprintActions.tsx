@@ -9,19 +9,25 @@ import {
   ActionsContainer,
   ValidationBackdrop,
 } from 'src/modules/BlueprintEditor/components';
+import { useBlueprintActions } from 'src/modules/BlueprintEditor/hooks';
 
 const BlueprintActions = () => {
   const theme = useTheme();
-  const [backdropIsOpen, setBackdropIsOpen] = React.useState(false);
-
-  const closeValidationBackdrop = () => setBackdropIsOpen(false);
-
-  const openValidationBackdrop = () => setBackdropIsOpen(true);
+  const {
+    backdropIsOpen,
+    openValidationBackdrop,
+    closeValidationBackdrop,
+    saveDisabled,
+  } = useBlueprintActions();
 
   return (
     <>
       <ActionsContainer>
-        <Button variant="contained" onClick={openValidationBackdrop}>
+        <Button
+          variant="contained"
+          onClick={openValidationBackdrop}
+          disabled={saveDisabled}
+        >
           <Box component="span" marginRight={theme.spacing(1)}>
             <FontAwesomeIcon icon={faFloppyDisk} fixedWidth size="sm" />
           </Box>
