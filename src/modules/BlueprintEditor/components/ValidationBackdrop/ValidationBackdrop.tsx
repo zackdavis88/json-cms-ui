@@ -68,8 +68,7 @@ const ValidationBackdrop = ({ onAfterValidation }: ValidationBackdropProps) => {
           } else {
             // TODO: This is where you left off, running list of things before this is ready to merge:
             /*
-              1. Field accordions controlled via prop, defaulting to closed but ones that are new or have errors will be opened.
-              2. Disable the save button by default, only enable it once the BlueprintEditor has a change.
+              1. Disable the save button by default, only enable it once the BlueprintEditor has a change.
             */
             router.push(ROUTES.BLUEPRINTS).then(() => {
               showNotification(

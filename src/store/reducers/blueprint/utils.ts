@@ -29,6 +29,7 @@ export const reduceAPIBlueprint: ReduceAPIBlueprint = (fields, parentId = '') =>
         regex: field.regex || '',
         arrayOf: '',
         children: [],
+        isExpanded: false,
       };
 
       const arrayOfField = field.arrayOf;

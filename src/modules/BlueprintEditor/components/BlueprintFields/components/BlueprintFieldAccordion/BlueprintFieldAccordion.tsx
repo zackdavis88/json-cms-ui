@@ -89,8 +89,20 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
     updateBlueprintFieldView(field.id);
   };
 
+  const handleExpandAccordion = (_event: never, isExpanded: boolean) => {
+    updateBlueprintField({
+      ...field,
+      isExpanded,
+    });
+  };
+
   return (
-    <Accordion defaultExpanded TransitionProps={{ unmountOnExit: true }}>
+    <Accordion
+      defaultExpanded
+      TransitionProps={{ unmountOnExit: true }}
+      expanded={field.isExpanded}
+      onChange={handleExpandAccordion}
+    >
       <AccordionSummary
         id={field.id}
         name={field.name}

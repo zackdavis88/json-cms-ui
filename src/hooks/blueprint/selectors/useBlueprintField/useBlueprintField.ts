@@ -35,6 +35,9 @@ function useBlueprintField(fieldId: string) {
   const errorMessage = useSelector(
     ({ blueprint }: RootState) => blueprint.fields[fieldId].errorMessage,
   );
+  const isExpanded = useSelector(
+    ({ blueprint }: RootState) => blueprint.fields[fieldId].isExpanded,
+  );
 
   if (!id) {
     return null;
@@ -55,6 +58,7 @@ function useBlueprintField(fieldId: string) {
     children,
     errorType,
     errorMessage,
+    isExpanded,
   };
 }
 

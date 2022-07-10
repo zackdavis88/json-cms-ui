@@ -22,6 +22,7 @@ const useDispatchAddBlueprintField = () => {
       regex: '',
       arrayOf: '',
       children: [],
+      isExpanded: true,
     };
     return dispatch(addBlueprintFieldAction(newField));
   }, [dispatch]);

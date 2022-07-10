@@ -44,6 +44,8 @@ export interface BlueprintField {
   children: string[];
   errorType?: BlueprintFieldErrorTypes;
   errorMessage?: string;
+
+  isExpanded: boolean;
 }
 
 export type BlueprintFieldView = 'root' | BlueprintField['id'];
