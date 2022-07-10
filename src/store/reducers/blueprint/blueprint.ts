@@ -143,21 +143,15 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
             const parentField = { ...newState.fields[parentId] }; // This would be the parent of the parent.
             delete parentField.errorType;
             delete parentField.errorMessage;
-            newState.fields = {
-              ...newState.fields,
-              [parentId]: parentField,
-            };
+            newState.fields[parentId] = parentField;
 
             parentId = parentField.parentId;
           }
         }
 
         // Attach the new field and its updated parent.
-        newState.fields = {
-          ...newState.fields,
-          [action.field.id]: { ...action.field, parentId: state.fieldView },
-          [state.fieldView]: parentField,
-        };
+        newState.fields[action.field.id] = { ...action.field, parentId: state.fieldView };
+        newState.fields[state.fieldView] = parentField;
       }
 
       newState.hasChange = true;
@@ -165,10 +159,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
     }
     case BLUEPRINT_UPDATE_FIELD: {
       const newState = { ...state };
-      newState.fields = {
-        ...newState.fields,
-        [action.field.id]: action.field,
-      };
+      newState.fields[action.field.id] = action.field;
 
       // If a field name was updated we need to clear any errors in the tree related to it.
       const fieldNameWasUpdated =
@@ -198,6 +189,8 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return newState;
     }
     case BLUEPRINT_UPDATE_FIELD_ERROR: {
+      const newState = { ...state };
+
       // This will attach an errorType/message to a specific field.
       // Then it will traverse the tree and attach a NESTED error to all parents.
       const fieldWithError = {
@@ -205,13 +198,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
         errorType: action.field.errorType,
         errorMessage: action.field.errorMessage,
       };
-      let newState = {
-        ...state,
-        fields: {
-          ...state.fields,
-          [action.field.id]: fieldWithError,
-        },
-      };
+      newState.fields[action.field.id] = fieldWithError;
 
       let parentId = fieldWithError.parentId;
       while (parentId) {
@@ -219,13 +206,7 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
           ...newState.fields[parentId],
           errorType: BlueprintFieldErrorTypes.NESTED,
         };
-        newState = {
-          ...newState,
-          fields: {
-            ...newState.fields,
-            [parentId]: parentFieldWithError,
-          },
-        };
+        newState.fields[parentId] = parentFieldWithError;
 
         parentId = parentFieldWithError.parentId;
       }

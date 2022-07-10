@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select as MUISelect, SelectProps } from '@mui/
 
 const Select = ({ children, ...selectProps }: SelectProps) => {
   return (
-    <FormControl variant="filled" sx={{ width: '100%' }}>
+    <FormControl fullWidth variant="filled">
       <InputLabel id={`${selectProps.id}-label`}>Type</InputLabel>
       <MUISelect {...selectProps} labelId={`${selectProps.id}-label`}>
         {children}

@@ -54,6 +54,11 @@ const BlueprintFieldAccordion = ({ fieldId }: BlueprintFieldAccordionProps) => {
     });
   };
 
+  /*
+    TODO: Lower priority for now.
+
+    Update our logic around min/max and allow it to be any number | undefined.
+  */
   const handleMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const max = Number(event.target.value) < 0 ? 0 : Number(event.target.value);
     const min = max < field.min ? max : field.min;

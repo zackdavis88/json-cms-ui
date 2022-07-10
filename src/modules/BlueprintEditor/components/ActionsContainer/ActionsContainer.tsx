@@ -10,7 +10,7 @@ const ActionsContainer = styled(Box)(({ theme }) => ({
   'button:nth-of-type(1)': {
     marginRight: theme.spacing(1),
   },
-  'button:nth-of-type(2)': {
+  'a:nth-of-type(1)': {
     marginRight: theme.spacing(1),
   },
 }));
