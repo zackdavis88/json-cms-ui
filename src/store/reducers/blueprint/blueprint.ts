@@ -35,13 +35,13 @@ export interface BlueprintState {
   hasChange: boolean;
 }
 
-interface BlueprintAction extends ReduxAction {
-  field: BlueprintField;
-  fieldView: BlueprintFieldView;
-  name: string;
-  nameError: string;
-  rootFieldsError: string;
-  response: {
+export interface BlueprintAction extends ReduxAction {
+  field?: BlueprintField;
+  fieldView?: BlueprintFieldView;
+  name?: string;
+  nameError?: string;
+  rootFieldsError?: string;
+  response?: {
     body: {
       message: string;
       error: string;
@@ -78,12 +78,15 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
     case BLUEPRINT_SUCCESS: {
       const newState = { ...state };
 
-      const blueprint = action.response.body.blueprint;
-      const { rootFields, fields } = reduceAPIBlueprint(blueprint.fields);
+      const blueprint = action.response?.body.blueprint;
+      if (blueprint) {
+        const { rootFields, fields } = reduceAPIBlueprint(blueprint.fields);
 
-      newState.name = blueprint.name;
-      newState.rootFields = rootFields;
-      newState.fields = fields;
+        newState.name = blueprint.name;
+        newState.rootFields = rootFields;
+        newState.fields = fields;
+      }
+
       newState.isLoading = false;
       return newState;
     }
@@ -94,6 +97,10 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       };
     }
     case BLUEPRINT_NAME_UPDATE: {
+      if (!action.name) {
+        return { ...state };
+      }
+
       return {
         ...state,
         name: action.name,
@@ -102,12 +109,20 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       };
     }
     case BLUEPRINT_NAME_ERROR_UPDATE: {
+      if (!action.nameError) {
+        return { ...state };
+      }
+
       return {
         ...state,
         nameError: action.nameError,
       };
     }
     case BLUEPRINT_UPDATE_FIELD_VIEW: {
+      if (!action.fieldView) {
+        return { ...state };
+      }
+
       return {
         ...state,
         fieldView: action.fieldView,
@@ -115,12 +130,13 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
     }
     case BLUEPRINT_ADD_FIELD: {
       const newState = { ...state };
+      // Bail out of processing if we did not receive a field.
+      if (!action.field) {
+        return newState;
+      }
 
       if (state.fieldView === 'root') {
-        newState.fields = {
-          ...newState.fields,
-          [action.field.id]: action.field,
-        };
+        newState.fields[action.field.id] = action.field;
 
         newState.rootFields = [...newState.rootFields, action.field.id];
         newState.rootFieldsError = ''; // This is an error that gets set when rootFields failed validation because it was an empty array.
@@ -158,7 +174,12 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return newState;
     }
     case BLUEPRINT_UPDATE_FIELD: {
-      const newState = { ...state };
+      const newState = { ...state, fields: { ...state.fields } };
+      // Bail out of processing if we did not receive a field.
+      if (!action.field) {
+        return newState;
+      }
+
       newState.fields[action.field.id] = action.field;
 
       // If a field name was updated we need to clear any errors in the tree related to it.
@@ -190,6 +211,10 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
     }
     case BLUEPRINT_UPDATE_FIELD_ERROR: {
       const newState = { ...state };
+      // Bail out of processing if we did not receive a field.
+      if (!action.field) {
+        return newState;
+      }
 
       // This will attach an errorType/message to a specific field.
       // Then it will traverse the tree and attach a NESTED error to all parents.
@@ -214,7 +239,12 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return newState;
     }
     case BLUEPRINT_REMOVE_FIELD: {
-      const newState = { ...state };
+      const newState = { ...state, fields: { ...state.fields } };
+      // Bail out of processing if we did not receive a field.
+      if (!action.field) {
+        return newState;
+      }
+
       const removedFieldHasError = newState.fields[action.field.id].errorType;
       delete newState.fields[action.field.id];
 
@@ -263,6 +293,10 @@ const blueprintReducer: BlueprintReducer = (state = defaultState, action) => {
       return newState;
     }
     case BLUEPRINT_UPDATE_ROOT_FIELDS_ERROR: {
+      if (!action.rootFieldsError) {
+        return { ...state };
+      }
+
       return {
         ...state,
         rootFieldsError: action.rootFieldsError,
