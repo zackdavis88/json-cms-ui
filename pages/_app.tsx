@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Navbar />
-        <Box width="100vw" position="relative">
+        <Box width="100%" position="relative">
           <Container maxWidth="xl" disableGutters>
             <Notification />
             {pageProps.authRequired ? (
